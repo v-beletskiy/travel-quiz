@@ -6,16 +6,17 @@ require('dotenv').config();
 const port = process.env.PORT;
 const initializeDB = require("./db/DBconnection");
 
-const userApi = require("./db/routes/userApi");
+const userApiRoutes = require("./routes/userApi");
 
 
 const app = express();
 initializeDB();
 
 app.use(cors());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true, }));
 
-app.use('/api', userApi);
+app.use('/api', userApiRoutes);
 
 app.listen(port, function () {
   console.log(`Server is running on port: ${port}`);

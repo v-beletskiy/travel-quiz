@@ -1,3 +1,5 @@
 export const ActionType = {
-    LOGIN: 'LOGIN',
+    SIGNINLOCAL: 'SIGNINLOCAL',
+    SIGNUPSOCIAL: 'SIGNUPSOCIAL',
+    SIGNOUT: 'SIGNOUT',
 };
