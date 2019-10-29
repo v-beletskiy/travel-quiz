@@ -1,5 +1,5 @@
 export { };
-import { Request, Response, ErrorRequestHandler } from 'express';
+import { Request, Response } from 'express';
 const bcrypt = require('bcrypt');
 const User = require('../db/models/user');
 const authService = require('../services/authService');

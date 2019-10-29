@@ -1,7 +1,6 @@
 const crypto = require('crypto');
-import { Request, Response, NextFunction, ErrorRequestHandler } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import axios from 'axios';
-import { resolve } from 'dns';
 const { OAuth2Client } = require('google-auth-library');
 
 const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
