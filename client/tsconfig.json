@@ -6,5 +6,6 @@
         "module": "commonjs",
         "target": "esnext",
         "jsx": "react",
+        "esModuleInterop": true,
     }
 }

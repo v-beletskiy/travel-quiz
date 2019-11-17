@@ -1,0 +1,128 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 40px 40px 40px;
+  background: rgba(112, 232, 240, 0.15);
+  mask-image: linear-gradient(to top, transparent 0%, black 25%);
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, black 25%);
+  @include res(mobile) {
+    padding: 15px 30px 25px 30px;
+    &--mobile-open {
+      mask-image: unset;
+      -webkit-mask-image: unset;
+    }
+  }
+}
+
+.header-first-block {
+  display: flex;
+  justify-content: space-between;
+  &__logo {
+    padding-right: 150px;
+    @include res(mobile) {
+      padding-right: 70px;
+    }
+    @include res(tablet) {
+      padding-right: 70px;
+    }
+  }
+  &__navigation-container {
+    display: flex;
+    @include reset-list;
+    @include res(mobile) {
+      display: none;
+    }
+    a {
+      color: $textColor;
+    }
+  }
+}
+
+.header-second-block {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  &__dropdown-arrow {
+    padding-left: 10px;
+  }
+  @include res(mobile) {
+    display: none;
+  }
+}
+
+.header-navigation-item {
+  padding-right: 30px;
+  @include res(mobile) {
+    padding-right: 20px;
+  }
+  @include res(tablet) {
+    padding-right: 20px;
+  }
+}
+
+.header-mobile-menu-icon {
+  width: 25px;
+  @include res(tablet) {
+    display: none;
+  }
+  @include res(desktop) {
+    display: none;
+  }
+}
+
+.header-mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: #fff;
+  visibility: visible;
+  opacity: 1;
+  transition: $mobileMenuTransitionDuration;
+  &--closed {
+    visibility: hidden;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    left: 50vw;
+    top: 50vh;
+  }
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 30px;
+  }
+  &__close-button {
+    width: 30px;
+    height: 30px;
+  }
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 40px;
+  }
+  &__main {
+    &__navigation-container {
+      @include reset-list;
+      display: flex;
+      flex-direction: column;
+      :first-child {
+        margin-bottom: 10px;
+      }
+      li {
+        background: linear-gradient(45deg, #9ee8ff, #f1fcff);
+        border-radius: 100px 20px;
+        padding: 5px 35px;
+        a {
+          color: #1a82a2;
+        }
+      }
+    }
+  }
+}

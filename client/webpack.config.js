@@ -10,13 +10,13 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, '/dist'),
-        filename: 'bundle.min.js'
+        filename: 'bundle.min.js',
     },
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
-                loader: 'ts-loader'
+                loader: 'ts-loader',
             },
             {
                 test: /\.(sa|sc|c)ss$/,
@@ -26,6 +26,37 @@ module.exports = {
                     },
                     'css-loader',
                     'sass-loader',
+                ],
+            },
+            {
+                test: /\.(ttf|otf|eot|woff|woff2)$/,
+                use: {
+                    loader: "file-loader",
+                    options: {
+                        name: `./src/assets/fonts/[name].[ext]`,
+                    }
+                }
+            },
+            {
+                test: /\.svg$/,
+                use: [
+                    {
+                        loader: "babel-loader",
+                    },
+                    {
+                        loader: "react-svg-loader",
+                    }
+                ]
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: "babel-loader",
+                    },
+                    {
+                        loader: 'file-loader',
+                    },
                 ],
             },
         ]
@@ -43,5 +74,5 @@ module.exports = {
             chunkFilename: '[id].css',
         }),
     ],
-    devtool: 'inline-source-map'
+    devtool: 'inline-source-map',
 }

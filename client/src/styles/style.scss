@@ -1,0 +1,27 @@
+@import "./variables.scss";
+
+body {
+  font-family: "Lavana", "Montserrat", "Arial";
+  font-size: 32px;
+}
+
+a {
+  &:link {
+    text-decoration: none;
+  }
+  &:visited {
+    color: $textColor;
+    text-decoration: none;
+  }
+}
+
+img {
+  display: block;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100vh;
+}

@@ -1,0 +1,26 @@
+@mixin reset-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@mixin reset-margin-padding {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin res($name) {
+  @if $name == mobile {
+    @media (max-width: 575px) {
+      @content;
+    }
+  } @else if $name == tablet {
+    @media (min-width: 576px) and (max-width: 1199px) {
+      @content;
+    }
+  } @else if $name == desktop {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+}

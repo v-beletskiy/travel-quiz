@@ -2,6 +2,7 @@ export {};
 const authService = require('../services/authService');
 const express = require('express');
 import { Request, Response, NextFunction } from 'express';
+import CityData from '../db/scriptsToFillDB/cityData';
 
 const userController = require('../controllers/user');
 
@@ -14,5 +15,7 @@ userApiRouter.post('/signin', userController.signIn);
 userApiRouter.get('/user', authService.verifyJWT, (req: Request, res: Response, next: NextFunction) => {
     res.status(200).send('HELLO!!!');
 })
+
+userApiRouter.get('/city', CityData);
 
 module.exports = userApiRouter;

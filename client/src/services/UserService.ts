@@ -2,6 +2,21 @@ import axios from 'axios';
 import { authStrategyTypes } from '../../../server/src/data/authRoles';
 
 export default class UserService {
+    static isAuthenticated(authData: String[]) {
+        const [ accessToken ] = authData;
+        if (accessToken) {
+            const { exp } = this.parseAccessTokenPayload(accessToken.split('.')[1]);
+            return Date.now() < exp;
+        } else {
+            return false;
+        }
+    }
+
+    static parseAccessTokenPayload(payload: string) {
+        const accessTokenPayload = atob(payload);
+        return JSON.parse(accessTokenPayload); 
+    }
+
     static signUpLocal = async (email: String, password: String) => {
         try {
             const userData = {

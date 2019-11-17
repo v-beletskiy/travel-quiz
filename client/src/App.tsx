@@ -1,82 +1,63 @@
 import * as React from 'react';
-import './App.scss';
+import { Provider } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { store, history } from './store/store';
+import './styles/normalize.scss';
+import './styles/style.scss';
+import './styles/fonts.scss';
 import withAuth from './HOCs/withAuth';
-interface Props {
-    signUpLocal: Function,
-    signInLocal: Function,
-    signUpSocial: Function,
-    signInSocial: Function,
-    signOut: Function,
-}
+import UserService from './services/UserService';
 
-interface State {
-    emailSignUp: String,
-    emailSignIn: String,
-    passwordSignUp: String,
-    passwordSignIn: String,
-}
+import MainLandingPage from './pages/MainLandingPage/MainLandingPage';
+import MainPage from './pages/MainPage/MainPage';
 
-class App extends React.Component<Props, State> {
-    constructor(props: Props) {
+interface IState {
+    accessToken: String,
+}
+class App extends React.Component<{}, IState> {
+    constructor(props: any) {
         super(props);
         this.state = {
-            emailSignUp: '',
-            emailSignIn: '',
-            passwordSignUp: '',
-            passwordSignIn: '',
-        }
+            accessToken: '',
+        };
     }
 
-    handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-        const eventName = event.currentTarget.name;
-        const value = event.currentTarget.value;
-        switch(eventName) {
-            case 'localEmailSignUp': {
-                this.setState({ emailSignUp: value });
-                break;
-            }
-            case 'localEmailSignIn': {
-                this.setState({ emailSignIn: value });
-                break;
-            }
-            case 'localPasswordSignUp': {
-                this.setState({ passwordSignUp: value });
-                break;
-            }
-            case 'localPasswordSignIn': {
-                this.setState({ passwordSignIn: value });
-                break;
-            }
-        }
+    setAuthData = (authData: String[]) => {
+        const [accessToken] = authData;
+        this.setState({ accessToken });
+    }
+
+    resetAuthData = () => {
+        this.setState({ accessToken: '' });
     }
 
     render() {
-        const { signUpLocal, signInLocal, signUpSocial, signInSocial, signOut } = this.props;
-        const { emailSignUp, emailSignIn, passwordSignUp, passwordSignIn } = this.state;
+        const { accessToken } = this.state;
         return (
-            <>
-                <div>
-                    <h1 className="testClass">Please, sign in!</h1>
-                </div>
-                    <p>Sign up via email & login</p>
-                    <input type="email" name="localEmailSignUp" onChange={this.handleChange} />
-                    <input type="password" name="localPasswordSignUp" onChange={this.handleChange} />
-                    <button onClick={() => { signUpLocal(emailSignUp, passwordSignUp) }}>Submit</button>
-                    <p>Sign in via email & login</p>
-                    <input type="email" name="localEmailSignIn" onChange={this.handleChange} />
-                    <input type="password" name="localPasswordSignIn" onChange={this.handleChange} />
-                    <button onClick={() => { signInLocal(emailSignIn, passwordSignIn) }}>Submit</button>
-                    <br />
-                <button onClick={() => signUpSocial('google')}>Google Sign up</button>
-                <button onClick={() => signInSocial('google')}>Google Sign in</button>
-                <button onClick={() => signOut('google')}>Google Sign out</button>
-                <br />
-                <button onClick={() => signUpSocial('facebook')}>Facebook Sign up</button>
-                <button onClick={() => signInSocial('facebook')}>Facebook Sign in</button>
-                <button onClick={() => signOut('facebook')}>Facebook Sign out</button>
-            </>
+            <Provider store={store}>
+                <ConnectedRouter history={history}>
+                    <div className="app">
+                        <Switch>
+                            {/* {UserService.isAuthenticated([accessToken]) ? */}
+                            {1 ?
+                                <Route path="/" exact component={withAuth(MainPage, this.setAuthData, this.resetAuthData)} /> :
+                                <Route path="/" exact component={withAuth(MainLandingPage, this.setAuthData, this.resetAuthData)} />
+                            }
+                            {/* {indexRoutes.map((route, idx) => {
+                            if (route.private) {
+                                return route.component ? this.renderPrivateRoute(route, idx) : null;
+                            } else {
+                                return route.component ? this.renderRoute(route, idx) : null;
+                            }
+                        })}
+                        <Route component={Notfound} /> */}
+                        </Switch>
+                    </div>
+                </ConnectedRouter>
+            </Provider>
         )
     }
 }
 
-export default withAuth(App);
+export default App;

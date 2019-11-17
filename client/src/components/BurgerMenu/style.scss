@@ -1,0 +1,25 @@
+.burger-menu-container {
+  display: flex;
+  flex-direction: column;
+  :last-child {
+    margin-bottom: 0;
+  }
+  &__item {
+    height: 2px;
+    width: 100%;
+    background-color: #000;
+    margin-bottom: 4px;
+    &--0 {
+      width: 50%;
+      align-self: flex-start;
+    }
+    &--1 {
+      width: 75%;
+      align-self: center;
+    }
+    &--2 {
+      width: 50%;
+      align-self: flex-end;
+    }
+  }
+}

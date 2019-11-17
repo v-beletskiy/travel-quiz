@@ -1,7 +1,7 @@
 import { ActionType } from '../actions/user/actionTypes';
+import IUser from './types/user';
 
-const userInitialState = {
-  accessToken: '',
+const userInitialState: IUser = {
   email: '',
   firstName: '',
   lastName: '',
@@ -12,11 +12,7 @@ export default (state = userInitialState, action: any) => {
     case ActionType.SIGNINLOCAL:
     case ActionType.SIGNUPSOCIAL: {
       const { email, firstName, lastName } = action.user.userData;
-      const accessToken = action.user.token;
-      return { ...state, email, firstName, lastName, accessToken };
-    }
-    case ActionType.SIGNOUT: {
-      return { ...state, ...userInitialState };
+      return { ...state, email, firstName, lastName };
     }
     default: {
       return state;

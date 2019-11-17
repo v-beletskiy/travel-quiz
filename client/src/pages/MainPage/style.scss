@@ -1,0 +1,14 @@
+@import "../../styles/mixins.scss";
+
+.container {
+    flex-grow: 1;
+}
+
+.questionnaire-container {
+    display: flex;
+    justify-content: center;
+    padding: 50px 100px;
+    @include res(mobile) {
+        padding: 40px 50px;
+    }
+}

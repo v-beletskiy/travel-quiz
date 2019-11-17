@@ -12,7 +12,7 @@ export const signUpLocal = (email: String, password: String) => {
     }
 }
 
-export const signInLocal = (email: String, password: String) => {
+export const signInLocal = (email: String, password: String, setAuthData: Function) => {
     return async (dispatch: any) => {
         try {
             const user = await UserService.signInLocal(email, password);
@@ -21,6 +21,8 @@ export const signInLocal = (email: String, password: String) => {
                     type: ActionType.SIGNINLOCAL,
                     user,
                 });
+                const authData = [user.token];
+                setAuthData(authData);
             }
         } catch (err) {
             console.log(err);
@@ -28,17 +30,22 @@ export const signInLocal = (email: String, password: String) => {
     }
 }
 
-export const signUpInSocial = (type: String, data: any, actionType: String) => {
+export const signUpInSocial = (type: String, data: any, actionType: String, setAuthData: Function) => {
     return async (dispatch: any) => {
         try {
             let user;
             switch (type) {
                 case authStrategyTypes.google: {
                     user = await UserService.signUpInViaGoogle(data, actionType);
+                    const authData = [user.token];
+                    setAuthData(authData);
                     break;
                 }
                 case authStrategyTypes.facebook: {
                     user = await UserService.signUpInViaFacebook(data, actionType);
+                    const authData = [user.token];
+                    setAuthData(authData);
+                    break;
                 }
             }
             if (user) {
@@ -51,10 +58,4 @@ export const signUpInSocial = (type: String, data: any, actionType: String) => {
             console.log(err);
         }
     };
-}
-
-export const signOut = () => {
-    return {
-        type: ActionType.SIGNOUT,
-    }
 }
