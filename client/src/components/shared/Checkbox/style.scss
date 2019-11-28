@@ -1,0 +1,54 @@
+.checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  min-width: 20px;
+  height: 20px;
+  position: relative;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+  &:after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 7px;
+    width: 4px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+  }
+  &--checked {
+    border: 0;
+    animation: checkedCheckbox 0.6s forwards;
+    @keyframes checkedCheckbox {
+      0% {
+        transform: scale(1);
+        background: #fff;
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+        background: #81e1ff;
+      }
+    }
+    &:after {
+      animation: rotateCheckboxIcon linear .4s forwards;
+      @keyframes rotateCheckboxIcon {
+        0% {
+          transform: rotate(45deg) scale(.1);
+        }
+        50% {
+          transform: rotate(180deg) scale(.4);
+        }
+        100% {
+          transform: rotate(405deg) scale(1);
+        }
+      }
+    }
+  }
+}

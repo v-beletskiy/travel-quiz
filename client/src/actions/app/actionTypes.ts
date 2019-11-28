@@ -1,0 +1,4 @@
+export const ActionType = {
+    SET_QUESTION_NUMBER: 'SET_QUESTION_NUMBER',
+    UPDATE_ANSWERS: 'UPDATE_ANSWERS',
+};

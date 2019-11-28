@@ -1,0 +1,23 @@
+.progress-bar {
+  align-self: stretch;
+  height: 5px;
+  background-color: #d2e4e4;
+  border-radius: 5px;
+  &__item {
+    background-color: #81e1ff;
+    height: 5px;
+    transition: all 0.8s cubic-bezier(0.68, 0, 0.24, 1.65);
+    border-radius: 5px;
+  }
+}
+
+.percentage {
+  align-self: stretch;
+  padding-top: 7px;
+  font-size: 14px;
+  color: #d2e4e4;
+  font-weight: 700;
+  &__value {
+    transition: all 0.8s cubic-bezier(0.68, 0, 0.24, 1.65);
+  }
+}

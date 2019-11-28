@@ -1,2 +1,20 @@
+//screen size points
+$mobileMax: 575px;
+$tabletMin: 576px;
+$tabletMax: 1199px;
+$desktop: 1200px;
+
 $textColor: #303030;
-$mobileMenuTransitionDuration: .35s;
+$mobileMenuTransitionDuration: 0.35s;
+
+$containerPaddingTopBottom: 50px;
+$containerPaddingLeftRight: 15vw;
+$containerPaddingTopBottomMobile: 40px;
+$containerPaddingLeftRightMobile: 30px;
+
+:export {
+  mobileMax: $mobileMax;
+  tabletMin: $tabletMin;
+  tabletMax: $tabletMax;
+  desktop: $desktop;
+}

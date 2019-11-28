@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import './style.scss';
-import Temperature from './QuestionnaireStepsComponents/Temperature/Temperature';
+import Stepper from './QuestionnaireSteps/Stepper';
 
 interface IProps {
     firstName: string,
@@ -25,16 +25,23 @@ const navigationItems = [
 const MainLandingPage = (props: IProps) => {
     const { firstName, lastName } = props;
     const [isMobileMenuOpen, setMobileMenuStatus] = useState(false);
+
     const toggleMobileMenu = () => {
         document.body.style.overflow = isMobileMenuOpen ? 'visible' : 'hidden';
         setMobileMenuStatus(!isMobileMenuOpen);
     }
+
     return (
         <>
-            <Header navigationItems={navigationItems} name={`${firstName} ${lastName}`} isMobileMenuOpen={isMobileMenuOpen} toggleMobileMenu={toggleMobileMenu} />
+            <Header
+                navigationItems={navigationItems}
+                name={`${firstName} ${lastName}`}
+                isMobileMenuOpen={isMobileMenuOpen}
+                toggleMobileMenu={toggleMobileMenu}
+            />
             <main className="container">
                 <div className="questionnaire-container">
-                    <Temperature />
+                    <Stepper />
                 </div>
             </main>
             <Footer visible={isMobileMenuOpen} />

@@ -1,0 +1,90 @@
+$priceTagTransitionTime: .4s;
+
+.range-slider-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: var(--rectangleWidth);
+  height: var(--rectangleHeight);
+  perspective: 500px;
+  transform-style: preserve-3d;
+  transform: rotateX(-40deg);
+  &__side {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(153, 231, 255);
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      display: block;
+      height: 100%;
+      width: var(--highlightedInputValue);
+      background: linear-gradient(90deg, #fff3e0, #ffb94bd4);
+      box-shadow: 0 0px 70px 5px rgba(253, 158, 44, 0.3);
+    }
+    &--front {
+      transform: translateZ(calc(var(--rectangleZCoord) / 2));
+      box-shadow: 0 30px 50px -10px rgba(180, 187, 187, .7);
+      &:hover {
+        .range-slider-price-tag {
+          transform: translateX(-50%) scale(1.1);
+          transition: transform $priceTagTransitionTime;
+        }
+      }
+    }
+    &--back {
+      transform: translateZ(calc(var(--rectangleZCoord) / -2));
+    }
+    &--right {
+      transform: rotateY(90deg) translateZ(calc(var(--rectangleWidth) / 2));
+      width: var(--rectangleZCoord);
+      background-color: #cdf0fb;
+    }
+    &--left {
+      transform: rotateY(-90deg) translateZ(calc(var(--rectangleWidth) / 2));
+      width: var(--rectangleZCoord);
+      background-color: #cdf0fb;
+    }
+    &--top {
+      transform: rotateX(90deg) translateZ(calc(var(--rectangleZCoord) / 2));
+      height: var(--rectangleZCoord);
+      background-color: #a3d8e8;
+      opacity: .8;
+    }
+    &--bottom {
+      transform: rotateX(-90deg) translateZ(calc(var(--rectangleHeight) - var(--rectangleZCoord) / 2));
+      height: var(--rectangleZCoord);
+    }
+  }
+  &__inputFront {
+    position: absolute;
+    height: 100%;
+    opacity: 0;
+    top: 0;
+    width: 100%;
+    transform: translateZ(calc(var(--rectangleZCoord) / 2));
+  }
+  &__inputTop {
+    @extend .range-slider-container__side--top;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+.range-slider-price-tag {
+  content: "";
+  position: absolute;
+  top: 125%;
+  left: var(--highlightedInputValue);
+  display: block;
+  min-width: 75px;
+  transform: translateX(-50%);
+  transition: transform $priceTagTransitionTime;
+  background: linear-gradient(90deg, #fff3e0, #ffb94bd4);
+  border-radius: 10%;
+}

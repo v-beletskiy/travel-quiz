@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './style.scss';
-import BurgerMenu from '../BurgerMenu/BurgerMenu';
+import BurgerMenu from '../shared/BurgerMenu/BurgerMenu';
 const DropdownArrow = require("../../assets/icons/dropdownArrow.svg").default;
 const closeMobileMenuIcon = require("../../assets/icons/closeMobileMenu.png");
 
@@ -47,7 +47,7 @@ const Header = (props: IHeaderProps) => {
 				</div>
 			</div>
 			<div className="header-mobile-menu-icon" onClick={() => toggleMobileMenu()}>
-				<BurgerMenu />
+				<BurgerMenu items={3} />
 			</div>
 			<div className={`header-mobile-menu ${!isMobileMenuOpen ? 'header-mobile-menu--closed' : ''}`}>
 				<div className="header-mobile-menu__wrapper">
