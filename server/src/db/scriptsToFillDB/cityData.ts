@@ -120,15 +120,6 @@ const fillDBWithCities = () => {
         restTypeTags: [restTypeTags.resort, restTypeTags.exotic],
     })
     city13.save();
-    const city14 = new City({
-        city: 'Uvero Alto',
-        cityIdTezTour: 198457,
-        country: 'Dominicana',
-        countryIdTezTour: 111241,
-        natureTags: [natureTags.water],
-        restTypeTags: [restTypeTags.resort, restTypeTags.exotic],
-    })
-    city14.save();
     const city15 = new City({
         city: 'Dahab',
         cityIdTezTour: 26313,

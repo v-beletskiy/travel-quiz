@@ -4,11 +4,18 @@ const Schema = mongoose.Schema;
 
 const citySchema = new Schema({
     city: String,
+    coords: {
+        lat: Number,
+        lng: Number,
+    },
     cityIdTezTour: Number,
     country: String,
     countryIdTezTour: Number,
     natureTags: Array,
     restTypesTags: Array,
+    weather: {
+        temperature: Number,
+    }
 })
 const City = mongoose.model('City', citySchema);
 
