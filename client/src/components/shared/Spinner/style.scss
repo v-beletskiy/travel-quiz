@@ -1,0 +1,39 @@
+@import "../../../styles/variables";
+
+.spinner {
+  position: relative;
+  width: var(--spinnerContainerSmallerDimension);
+  height: var(--spinnerContainerSmallerDimension);
+  > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 8px solid #81e1ff;
+    opacity: 1;
+    border-radius: 50%;
+    animation: animate-spinner $spinnerDuration cubic-bezier(0.02, 0.55, 0.72, 0.87) infinite;
+  }
+  > div:nth-child(2) {
+    animation-delay: $spinnerDuration * 0.33;
+  }
+  > div:nth-child(3) {
+    animation-delay: $spinnerDuration * 0.66;
+  }
+}
+
+@keyframes animate-spinner {
+  0% {
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: var(--spinnerContainerSmallerDimension);
+    height: var(--spinnerContainerSmallerDimension);
+    opacity: 0;
+  }
+}

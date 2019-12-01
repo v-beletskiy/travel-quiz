@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
 import './style.scss';
 import { appAction } from '../../../actions';
 import ProgressBar from '../../../components/shared/ProgressBar/ProgressBar';
+import Spinner from '../../../components/shared/Spinner/Spinner';
 import { questionComponents } from '../../../data/Questions/questions';
 
 interface IProps {
+    isLoading: boolean,
     question: number,
     setQuestionNumber: Function,
     updateAnswers: Function,
@@ -13,6 +16,7 @@ interface IProps {
 
 const mapStateToProps = (state: any) => {
     return {
+        isLoading: state.app.isLoading,
         question: state.app.question,
     }
 }
@@ -49,25 +53,69 @@ const goNextButtonHandler = (setQuestionNumber: Function, updateAnswers: Functio
 }
 
 const Stepper = (props: IProps) => {
-    const { question, setQuestionNumber, updateAnswers } = props;
-    
+    const { isLoading, question, setQuestionNumber, updateAnswers } = props;
+    const [isSpinnerAnimationActive, setSpinnerAnimationStatus] = useState(false);
+    const [isQuestionAnimationActive, setQuestionAnimationStatus] = useState(true);
+    const [lastQuestionDimensions, setLastQuestionDimensions] = useState({
+        lastQuestionWidth: 0,
+        lastQuestionHeight: 0,
+    });
+
+    const questionContainer = useRef(null);
+    useEffect(() => {
+        setLastQuestionDimensions({
+            lastQuestionWidth: questionContainer.current.clientWidth,
+            lastQuestionHeight: questionContainer.current.clientHeight,
+        })
+    }, [question === questionComponents.length]);
+
     return (
-        <div className="question-container">
-            <p className="question-container__subheader">{questionComponents[question - 1].subheader}</p>
-            <ProgressBar value={calculateProgress(question, questionComponents.length)} />
-            {
-                React.cloneElement(questionComponents[question - 1].component,
+        <>
+            <CSSTransition
+                in={isLoading && !isQuestionAnimationActive}
+                timeout={1500}
+                unmountOnExit
+                classNames="spinner-container"
+                onEnter={() => setSpinnerAnimationStatus(true)}
+                onExited={() => {
+                    setSpinnerAnimationStatus(false);
+                    setQuestionAnimationStatus(true);
+                }}
+            >
+                <div
+                    className="spinner-container"
+                    style={{
+                        ['--spinnerContainerSmallerDimension' as any]: `${lastQuestionDimensions.lastQuestionWidth < lastQuestionDimensions.lastQuestionHeight ? lastQuestionDimensions.lastQuestionWidth : lastQuestionDimensions.lastQuestionHeight}px`,
+                        ['--spinnerContainerHeight' as any]: `${lastQuestionDimensions.lastQuestionHeight}px`,
+                    }}>
+                    <Spinner />
+                </div>
+            </CSSTransition>
+            <CSSTransition
+                in={!isLoading && !isSpinnerAnimationActive}
+                timeout={300}
+                unmountOnExit
+                classNames="question-container"
+                onExited={() => setQuestionAnimationStatus(false)}
+            >
+                <div className='question-container' ref={questionContainer}>
+                    <p className="question-container__subheader">{questionComponents[question - 1].subheader}</p>
+                    <ProgressBar value={calculateProgress(question, questionComponents.length)} />
                     {
-                        questionsQuantity: questionComponents.length,
-                        goPrevButtonHandler: goPrevButtonHandler,
-                        goNextButtonHandler: goNextButtonHandler,
-                        setQuestionNumber: setQuestionNumber,
-                        updateAnswers: updateAnswers,
-                        question: question,
+                        React.cloneElement(questionComponents[question - 1].component,
+                            {
+                                questionsQuantity: questionComponents.length,
+                                goPrevButtonHandler: goPrevButtonHandler,
+                                goNextButtonHandler: goNextButtonHandler,
+                                setQuestionNumber: setQuestionNumber,
+                                updateAnswers: updateAnswers,
+                                question: question,
+                            }
+                        )
                     }
-                )
-            }
-        </div>
+                </div>
+            </CSSTransition>
+        </>
     )
 }
 

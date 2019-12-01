@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import RadioButton from '../../../../components/shared/RadioButton/RadioButton';
 import Button from '../../../../components/shared/Button/Button';
 import { departureData } from '../../../../data/Questions/departure';
+import { appAction } from '../../../../actions';
 import '../style.scss';
 
 const mapStateToProps = (state: any) => {
@@ -11,18 +12,31 @@ const mapStateToProps = (state: any) => {
     }
 }
 
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        setLoadingStatus: (status: boolean) => {
+            dispatch(appAction.setLoadingStatus(status));
+        }
+    }
+}
+
 interface IProps {
     setQuestionNumber?: Function,
     updateAnswers?: Function,
     question?: number,
-    questionsQuantity?: number,
     goPrevButtonHandler?: Function,
     goNextButtonHandler?: Function,
     departureTime: string,
+    setLoadingStatus: Function,
+}
+
+const handleSearchCities = (setLoadingStatus: Function) => {
+    setLoadingStatus(true);
+    setTimeout(() => setLoadingStatus(false), 3000);
 }
 
 const DepartureTime = (props: IProps) => {
-    const { departureTime, setQuestionNumber, updateAnswers, question, questionsQuantity, goPrevButtonHandler, goNextButtonHandler } = props;
+    const { departureTime, setQuestionNumber, updateAnswers, question, goPrevButtonHandler, setLoadingStatus } = props;
     const [state, setDepartureTime] = useState(departureTime);
     useEffect(() => window.scrollTo(0, 0), []);
 
@@ -44,14 +58,16 @@ const DepartureTime = (props: IProps) => {
                 <Button className="first" onClick={() => goPrevButtonHandler(setQuestionNumber, updateAnswers, state, 'departure', question)}>
                     Prev
                 </Button>
-                <Button className="second" isDisabled={!state.length}
-                    onClick={() => goNextButtonHandler(setQuestionNumber, updateAnswers, state, 'departure', question, questionsQuantity)}
+                <Button
+                    className={`second ${state.length ? 'search-button' : ''}`}
+                    isDisabled={!state.length}
+                    onClick={() => handleSearchCities(setLoadingStatus)}
                 >
-                    Next
+                    Search!
                 </Button>
             </div>
         </>
     )
 }
 
-export default connect(mapStateToProps, null)(DepartureTime);
+export default connect(mapStateToProps, mapDispatchToProps)(DepartureTime);

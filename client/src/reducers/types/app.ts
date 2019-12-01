@@ -15,6 +15,7 @@ interface restType {
 }
 
 export default interface IApp {
+    isLoading: boolean,
     question: number,
     answers: {
         temperature: number,

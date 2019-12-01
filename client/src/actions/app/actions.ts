@@ -15,8 +15,17 @@ export const updateAnswers = (questionType: string, answerData: any) => {
             type: ActionType.UPDATE_ANSWERS,
             payload: {
                 data: answerData,
-                questionType: questionType
+                questionType: questionType,
             }
+        });
+    }
+}
+
+export const setLoadingStatus = (status: boolean) => {
+    return (dispatch: any) => {
+        dispatch({
+            type: ActionType.UPDATE_LOADING_STATUS,
+            status,
         });
     }
 }

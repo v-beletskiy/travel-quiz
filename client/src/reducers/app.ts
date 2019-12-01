@@ -2,6 +2,7 @@ import { ActionType } from '../actions/app/actionTypes';
 import IApp from './types/app';
 
 const appInitialState: IApp = {
+    isLoading: false,
     question: 1,
     answers: {
         temperature: 25,
@@ -27,6 +28,10 @@ const appInitialState: IApp = {
 
 export default (state = appInitialState, action: any) => {
     switch (action.type) {
+        case ActionType.UPDATE_LOADING_STATUS: {
+            const { status } = action;
+            return { ...state, isLoading: status };
+        }
         case ActionType.SET_QUESTION_NUMBER: {
             const { number } = action;
             return { ...state, question: number };
