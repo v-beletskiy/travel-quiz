@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import RadioButton from '../../../../components/shared/RadioButton/RadioButton';
 import Button from '../../../../components/shared/Button/Button';
@@ -24,7 +24,6 @@ interface IProps {
 const Persons = (props: IProps) => {
     const { persons, setQuestionNumber, updateAnswers, question, questionsQuantity, goPrevButtonHandler, goNextButtonHandler } = props;
     const [state, setPersons] = useState(persons);
-    useEffect(() => window.scrollTo(0, 0), []);
 
     return (
         <>

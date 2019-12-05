@@ -23,7 +23,8 @@ const appInitialState: IApp = {
         },
         budget: 0,
         departureTime: '',
-    }
+    },
+    citiesToChooseFrom: [],
 };
 
 export default (state = appInitialState, action: any) => {
@@ -61,6 +62,10 @@ export default (state = appInitialState, action: any) => {
                     console.error('There\'s no such a question to update data.');
                 }
             }
+        }
+        case ActionType.UPDATE_CITIES_TO_CHOOSE_FROM: {
+            const cities = action.payload;
+            return { ...state, citiesToChooseFrom: cities };
         }
         default: {
             return state;

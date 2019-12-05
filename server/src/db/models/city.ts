@@ -15,7 +15,8 @@ const citySchema = new Schema({
     restTypesTags: Array,
     weather: {
         temperature: Number,
-    }
+    },
+    imgPreviewName: String,
 })
 const City = mongoose.model('City', citySchema);
 

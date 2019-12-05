@@ -2,6 +2,30 @@ export { };
 import { Request, Response } from 'express';
 import axios from 'axios';
 const City = require('../db/models/city');
+import fillDBWithCities from '../db/scriptsToFillDB/cityData';
+
+async function getSuitableCitiesByParams(req: Request, res: Response) {
+    try {
+        const { temperature, nature, restTypes } = req.body;
+        const maxTemperature = temperature + 5;
+        const minTemperature = temperature - 5;
+        const cities = await City.find({
+            'weather.temperature': { $lt: maxTemperature, $gt: minTemperature },
+            $or: [{ natureTags: { $in: nature } }, { restTypesTags: { $in: restTypes } }],
+        });
+        const cityNames = cities.map((city: any) => {
+            return ({
+                name: city.city,
+                temperature: city.weather.temperature,
+                img: city.imgPreviewName,
+            });
+        });
+        res.status(200).json(cityNames);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ mes: 'Can\'t find appropriate cities for your rest.', err: err });
+    }
+}
 
 async function getCityCoordsByName(request: Request, responce: Response) {
     try {
@@ -39,6 +63,17 @@ async function getCityCoordsByName(request: Request, responce: Response) {
     }
 }
 
+async function fillDB(req: Request, res: Response) {
+    try {
+        await fillDBWithCities();
+        res.status(200).json('All the cities\' data has been saved to DB succesfully!');
+    } catch(e) {
+        res.status(500).json({ mes: 'Something went wrong, while attempting to fill DB with cities\' data.', err: e });
+    }
+}
+
 module.exports = {
+    getSuitableCitiesByParams,
     getCityCoordsByName,
+    fillDB,
 }

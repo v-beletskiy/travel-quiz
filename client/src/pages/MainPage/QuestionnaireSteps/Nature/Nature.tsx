@@ -1,8 +1,9 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer } from 'react';
 import { connect } from 'react-redux';
 import { natureData } from '../../../../data/Questions/nature';
 import Button from '../../../../components/shared/Button/Button';
 import Checkbox from '../../../../components/shared/Checkbox/Checkbox';
+import { natureType } from '../../../../reducers/types/app';
 import '../style.scss';
 
 const mapStateToProps = (state: any) => {
@@ -12,7 +13,7 @@ const mapStateToProps = (state: any) => {
 }
 
 interface IProps {
-    nature: IInitialState,
+    nature: natureType,
     setQuestionNumber?: Function,
     updateAnswers?: Function,
     question?: number,
@@ -60,7 +61,6 @@ const checkNavigationButtonStatus = (state: IInitialState) => {
 const Nature = (props: IProps) => {
     const { nature, setQuestionNumber, updateAnswers, question, questionsQuantity, goPrevButtonHandler, goNextButtonHandler } = props;
     const [state, dispatch] = useReducer(reducer, getInitialState(nature));
-    useEffect(() => window.scrollTo(0, 0), []);
 
     return (
         <>

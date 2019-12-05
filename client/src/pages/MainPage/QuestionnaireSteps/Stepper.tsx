@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useLayoutEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import './style.scss';
@@ -49,6 +49,8 @@ const goNextButtonHandler = (setQuestionNumber: Function, updateAnswers: Functio
     if (questionNumber < questionsQuantity) {
         setQuestionNumber(questionNumber + 1);
         updateAnswers(questionType, answerData);
+    } else {
+        updateAnswers(questionType, answerData);
     }
 }
 
@@ -62,12 +64,18 @@ const Stepper = (props: IProps) => {
     });
 
     const questionContainer = useRef(null);
-    useEffect(() => {
+    useLayoutEffect(() => {
         setLastQuestionDimensions({
             lastQuestionWidth: questionContainer.current.clientWidth,
             lastQuestionHeight: questionContainer.current.clientHeight,
         })
     }, [question === questionComponents.length]);
+
+    useLayoutEffect(() => {
+        if (question !== questionComponents.length) {
+            window.scrollTo(0, 0);
+        }
+    }, [question]);
 
     return (
         <>
@@ -85,7 +93,9 @@ const Stepper = (props: IProps) => {
                 <div
                     className="spinner-container"
                     style={{
-                        ['--spinnerContainerSmallerDimension' as any]: `${lastQuestionDimensions.lastQuestionWidth < lastQuestionDimensions.lastQuestionHeight ? lastQuestionDimensions.lastQuestionWidth : lastQuestionDimensions.lastQuestionHeight}px`,
+                        ['--spinnerContainerSmallerDimension' as any]:
+                            `${lastQuestionDimensions.lastQuestionWidth < lastQuestionDimensions.lastQuestionHeight ?
+                                lastQuestionDimensions.lastQuestionWidth : lastQuestionDimensions.lastQuestionHeight}px`,
                         ['--spinnerContainerHeight' as any]: `${lastQuestionDimensions.lastQuestionHeight}px`,
                     }}>
                     <Spinner />

@@ -1,17 +1,23 @@
-interface natureType {
+export interface natureType {
     forest: boolean,
     mountains: boolean,
     water: boolean,
     desert: boolean,
 }
 
-interface restType {
+export interface restType {
     romantic: boolean,
     nightLife: boolean,
     extreme: boolean,
     historic: boolean,
     exotic: boolean,
     resort: boolean,
+}
+
+export interface citiesToChooseFrom {
+    name: string,
+    temperature: number,
+    img: string,
 }
 
 export default interface IApp {
@@ -24,5 +30,6 @@ export default interface IApp {
         restTypes: restType,
         budget: number,
         departureTime: string,
-    }
+    },
+    citiesToChooseFrom: [citiesToChooseFrom] | [],
 }

@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
 import RadioButton from '../../../../components/shared/RadioButton/RadioButton';
 import Button from '../../../../components/shared/Button/Button';
 import { departureData } from '../../../../data/Questions/departure';
 import { appAction } from '../../../../actions';
+import { natureType, restType, citiesToChooseFrom } from '../../../../reducers/types/app';
 import '../style.scss';
 
 const mapStateToProps = (state: any) => {
     return {
         departureTime: state.app.answers.departureTime,
+        temperature: state.app.answers.temperature,
+        nature: state.app.answers.nature,
+        restTypes: state.app.answers.restTypes,
+        citiesToChooseFrom: state.app.citiesToChooseFrom,
     }
 }
 
@@ -16,7 +21,10 @@ const mapDispatchToProps = (dispatch: any) => {
     return {
         setLoadingStatus: (status: boolean) => {
             dispatch(appAction.setLoadingStatus(status));
-        }
+        },
+        searchSuitableCities: (temperature: number, nature: natureType, restTypes: restType) => {
+            dispatch(appAction.searchSuitableCities(temperature, nature, restTypes));
+        },
     }
 }
 
@@ -28,17 +36,30 @@ interface IProps {
     goNextButtonHandler?: Function,
     departureTime: string,
     setLoadingStatus: Function,
+    temperature: number,
+    nature: natureType,
+    restTypes: restType,
+    searchSuitableCities: Function,
+    citiesToChooseFrom: [citiesToChooseFrom] | [],
 }
 
-const handleSearchCities = (setLoadingStatus: Function) => {
+const handleSearchCities = (setLoadingStatus: Function, searchSuitableCities: Function, temperature: number, nature: natureType, restTypes: restType) => {
     setLoadingStatus(true);
+    searchSuitableCities(temperature, nature, restTypes);
     setTimeout(() => setLoadingStatus(false), 3000);
 }
 
 const DepartureTime = (props: IProps) => {
-    const { departureTime, setQuestionNumber, updateAnswers, question, goPrevButtonHandler, setLoadingStatus } = props;
+    const {
+        departureTime, setQuestionNumber, updateAnswers, question, goPrevButtonHandler, goNextButtonHandler, setLoadingStatus, searchSuitableCities,
+        temperature, nature, restTypes, citiesToChooseFrom,
+    } = props;
     const [state, setDepartureTime] = useState(departureTime);
-    useEffect(() => window.scrollTo(0, 0), []);
+    useLayoutEffect(() => {
+        if (window.scrollY !== 0 && !citiesToChooseFrom.length) {
+            window.scrollTo(0, 0);
+        }
+    }, [])
 
     return (
         <>
@@ -61,7 +82,10 @@ const DepartureTime = (props: IProps) => {
                 <Button
                     className={`second ${state.length ? 'search-button' : ''}`}
                     isDisabled={!state.length}
-                    onClick={() => handleSearchCities(setLoadingStatus)}
+                    onClick={() => {
+                        goNextButtonHandler(setQuestionNumber, updateAnswers, state, 'departure', question);
+                        handleSearchCities(setLoadingStatus, searchSuitableCities, temperature, nature, restTypes)
+                    }}
                 >
                     Search!
                 </Button>

@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer } from 'react';
 import { connect } from 'react-redux';
 import '../style.scss';
 import { restTypesData } from '../../../../data/Questions/restTypes';
@@ -62,7 +62,6 @@ const checkNavigationButtonStatus = (state: IInitialState) => {
 const RestTypes = (props: IProps) => {
     const { restTypes, setQuestionNumber, updateAnswers, question, questionsQuantity, goPrevButtonHandler, goNextButtonHandler } = props;
     const [state, dispatch] = useReducer(reducer, getInitialState(restTypes));
-    useEffect(() => window.scrollTo(0, 0), []);
 
     return (
         <>

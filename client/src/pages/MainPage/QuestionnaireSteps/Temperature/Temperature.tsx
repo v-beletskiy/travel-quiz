@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import '../style.scss';
 import Button from '../../../../components/shared/Button/Button';
@@ -27,7 +27,6 @@ const handleTemperatureChange = (e: any, changeTemperature: Function) => {
 const Temperature = (props: IProps) => {
     const { temperature, setQuestionNumber, updateAnswers, question, questionsQuantity, goPrevButtonHandler, goNextButtonHandler } = props;
     const [temperatureState, changeTemperature] = useState(temperature);
-    useEffect(() => window.scrollTo(0, 0), []);
 
     return (
         <>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import '../style.scss';
 import { getScreenSize } from '../../../../utils/utils';
@@ -47,7 +47,6 @@ const getRangeSliderWidth = () => {
 const Budget = (props: IProps) => {
     const { budget, setQuestionNumber, updateAnswers, question, questionsQuantity, goPrevButtonHandler, goNextButtonHandler } = props;
     const [budgetState, changeBudget] = useState(budget ? budget : defaultBudget);
-    useEffect(() => window.scrollTo(0, 0), []);
 
     return (
         <>

@@ -26,7 +26,7 @@ export default class UserService {
             const user = await axios.post(`${process.env.LOCAL_URL}/api/signup`, { type: authStrategyTypes.local, user: userData });
             return user.data ? user.data : null;
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     }
 
@@ -39,7 +39,7 @@ export default class UserService {
             const user = await axios.post(`${process.env.LOCAL_URL}/api/signin`, { type: authStrategyTypes.local, user: userData });
             return user.data ? user.data : null;
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     }
 
@@ -48,7 +48,7 @@ export default class UserService {
             const googleUser = await axios.post(`${process.env.LOCAL_URL}/api/${actionType}`, { type: authStrategyTypes.google, token: data.getAuthResponse().id_token });
             return googleUser.data ? googleUser.data : null;
         } catch (err) {
-            console.log(err);
+            console.error(err);
             return `google ${actionType} failed`;
         }
     }
@@ -58,7 +58,7 @@ export default class UserService {
             const facebookUser = await axios.post(`${process.env.LOCAL_URL}/api/${actionType}`, { type: authStrategyTypes.facebook, token: data.accessToken });
             return facebookUser.data ? facebookUser.data : null;
         } catch (err) {
-            console.log(err);
+            console.error(err);
             return `facebook ${actionType} failed`;
         }
     }
