@@ -19,6 +19,14 @@
   > div:nth-child(3) {
     animation-delay: $spinnerDuration * 0.66;
   }
+
+  &__known-dimensions {
+    width: 100%;
+    height: 100%;
+    > div {
+      animation-name: animate-spinner-known-dimensions;
+    }
+  }
 }
 
 @keyframes animate-spinner {
@@ -34,6 +42,23 @@
     left: 0px;
     width: var(--spinnerContainerSmallerDimension);
     height: var(--spinnerContainerSmallerDimension);
+    opacity: 0;
+  }
+}
+
+@keyframes animate-spinner-known-dimensions {
+  0% {
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
     opacity: 0;
   }
 }

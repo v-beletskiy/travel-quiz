@@ -32,6 +32,15 @@ export const setLoadingStatus = (status: boolean) => {
     }
 }
 
+export const setToursLoadingStatus = (status: boolean) => {
+    return (dispatch: any) => {
+        dispatch({
+            type: ActionType.UPDATE_TOURS_LOADING_STATUS,
+            status,
+        });
+    }
+}
+
 export const searchSuitableCities = (temperature: number, nature: natureType, restTypes: restType) => {
     return async (dispatch: any) => {
         const chosenNatureTypes = Object.entries(nature).filter(item => item[1] === true).map(item => item[0]);
@@ -40,6 +49,15 @@ export const searchSuitableCities = (temperature: number, nature: natureType, re
         dispatch({
             type: ActionType.UPDATE_CITIES_TO_CHOOSE_FROM,
             payload: cities,
+        });
+    }
+}
+
+export const setChosenCity = (cityName: string) => {
+    return (dispatch: any) => {
+        dispatch({
+            type: ActionType.SET_CHOSEN_CITY,
+            cityName,
         });
     }
 }

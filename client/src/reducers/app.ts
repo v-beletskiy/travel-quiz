@@ -3,6 +3,7 @@ import IApp from './types/app';
 
 const appInitialState: IApp = {
     isLoading: false,
+    areToursLoading: false,
     question: 1,
     answers: {
         temperature: 25,
@@ -25,6 +26,7 @@ const appInitialState: IApp = {
         departureTime: '',
     },
     citiesToChooseFrom: [],
+    chosenCity: '',
 };
 
 export default (state = appInitialState, action: any) => {
@@ -32,6 +34,10 @@ export default (state = appInitialState, action: any) => {
         case ActionType.UPDATE_LOADING_STATUS: {
             const { status } = action;
             return { ...state, isLoading: status };
+        }
+        case ActionType.UPDATE_TOURS_LOADING_STATUS: {
+            const { status } = action;
+            return { ...state, areToursLoading: status };
         }
         case ActionType.SET_QUESTION_NUMBER: {
             const { number } = action;
@@ -66,6 +72,10 @@ export default (state = appInitialState, action: any) => {
         case ActionType.UPDATE_CITIES_TO_CHOOSE_FROM: {
             const cities = action.payload;
             return { ...state, citiesToChooseFrom: cities };
+        }
+        case ActionType.SET_CHOSEN_CITY: {
+            const { cityName } = action;
+            return { ...state, chosenCity: cityName };
         }
         default: {
             return state;

@@ -22,6 +22,7 @@ export interface citiesToChooseFrom {
 
 export default interface IApp {
     isLoading: boolean,
+    areToursLoading: boolean,
     question: number,
     answers: {
         temperature: number,
@@ -32,4 +33,5 @@ export default interface IApp {
         departureTime: string,
     },
     citiesToChooseFrom: [citiesToChooseFrom] | [],
+    chosenCity: string,
 }

@@ -1,10 +1,16 @@
 import React from 'react';
 import './style.scss';
 
-const Spinner = () => {
+interface IProps {
+    className?: string,
+}
+
+const Spinner = (props: IProps) => {
+    const { className } = props;
+
     return (
         <>
-            <div className="spinner">
+            <div className={`spinner ${className}`}>
                 <div />
                 <div />
                 <div />
