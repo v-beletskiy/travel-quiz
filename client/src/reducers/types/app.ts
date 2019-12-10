@@ -20,6 +20,15 @@ export interface citiesToChooseFrom {
     img: string,
 }
 
+export interface tours {
+    dateIn: string,
+    dateOut: string,
+    days: number,
+    hotelImg: string,
+    hotelName: string,
+    price: number,
+}
+
 export default interface IApp {
     isLoading: boolean,
     areToursLoading: boolean,
@@ -34,4 +43,5 @@ export default interface IApp {
     },
     citiesToChooseFrom: [citiesToChooseFrom] | [],
     chosenCity: string,
+    tours: [tours] | [],
 }

@@ -27,6 +27,7 @@ const appInitialState: IApp = {
     },
     citiesToChooseFrom: [],
     chosenCity: '',
+    tours: [],
 };
 
 export default (state = appInitialState, action: any) => {
@@ -76,6 +77,10 @@ export default (state = appInitialState, action: any) => {
         case ActionType.SET_CHOSEN_CITY: {
             const { cityName } = action;
             return { ...state, chosenCity: cityName };
+        }
+        case ActionType.GET_TOURS: {
+            const tours = action.payload;
+            return { ...state, tours: tours };
         }
         default: {
             return state;

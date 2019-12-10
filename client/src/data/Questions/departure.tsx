@@ -1,23 +1,17 @@
 export enum departureDateTypes {
-    tomorrow = 'tomorrow',
-    week = 'week',
     month = 'month',
+    later = 'later',
 }
 
 export const departureData = [
     {
-        type: departureDateTypes.tomorrow,
-        value: departureDateTypes.tomorrow,
-        text: 'Even tomorrow',
-    },
-    {
-        type: departureDateTypes.week,
-        value: departureDateTypes.week,
-        text: 'In a week',
-    },
-    {
         type: departureDateTypes.month,
         value: departureDateTypes.month,
         text: 'In a month',
+    },
+    {
+        type: departureDateTypes.later,
+        value: departureDateTypes.later,
+        text: 'Later, not right now',
     },
 ];

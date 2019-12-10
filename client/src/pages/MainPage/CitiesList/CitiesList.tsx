@@ -11,13 +11,19 @@ interface IProps {
     setChosenCity: Function,
     chosenCity: string,
     areToursLoading: boolean,
-    setToursLoadingStatus: Function,
+    loadTours: Function,
+    budget: number,
+    departureTime: string,
+    persons: string,
 }
 
 const mapStateToProps = (state: any) => {
     return {
         areToursLoading: state.app.areToursLoading,
         chosenCity: state.app.chosenCity,
+        budget: state.app.answers.budget,
+        departureTime: state.app.answers.departureTime,
+        persons: state.app.answers.persons,
     }
 }
 
@@ -26,31 +32,28 @@ const mapDispatchToProps = (dispatch: any) => {
         setChosenCity: (cityName: string) => {
             dispatch(appAction.setChosenCity(cityName));
         },
-        setToursLoadingStatus: (status: boolean) => {
-            dispatch(appAction.setToursLoadingStatus(status));
-        }
+        loadTours: (cityName: string, budget: number, departureTime: string, persons: string) => {
+            dispatch(appAction.loadTours(cityName, budget, departureTime, persons))
+        },
     }
 }
 
-const handleCityClick = (e: React.MouseEvent, setChosenCity: Function, setToursLoadingStatus: Function) => {
+const handleCityClick = (e: React.MouseEvent, setChosenCity: Function, loadTours: Function, budget: number, departureTime: string, persons: string) => {
     const cityName = e.currentTarget.id.split('__')[1];
-    setToursLoadingStatus(true);
-    setTimeout(() => {
-        setToursLoadingStatus(false);
-    }, 3000);
+    loadTours(cityName, budget, departureTime, persons);
     setChosenCity(cityName);
 }
 
 const CitiesList = (props: IProps) => {
-    const { citiesToChooseFrom, setChosenCity, chosenCity, areToursLoading, setToursLoadingStatus } = props;
+    const { citiesToChooseFrom, setChosenCity, chosenCity, areToursLoading, loadTours, budget, departureTime, persons } = props;
     const [isSpinnerAnimationActive, setSpinnerAnimationStatus] = useState(false);
 
-    const renderCityItem = (city: any, isDisabled?: boolean) => {
+    const renderCityItem = (city: citiesToChooseFrom, isDisabled?: boolean) => {
         return (
             <div
                 className={`cities-list-container__item ${isDisabled ? 'cities-list-container__item--disabled' : ''}`}
                 id={`citiesList__${city.name}`}
-                onClick={(e) => handleCityClick(e, setChosenCity, setToursLoadingStatus)}
+                onClick={(e) => handleCityClick(e, setChosenCity, loadTours, budget, departureTime, persons)}
             >
 
                 <img src={`${process.env.LOCAL_URL}/static/images/cities/${city.img}`} key={city.name} />
@@ -65,9 +68,9 @@ const CitiesList = (props: IProps) => {
     return (
         <div className="cities-list-container">
             {
-                (citiesToChooseFrom as Array<[citiesToChooseFrom] | []>).map((city: any) => {
+                (citiesToChooseFrom as Array<citiesToChooseFrom>).map(city => {
                     return (
-                        <>
+                        <React.Fragment key={city.name}>
                             <CSSTransition
                                 in={areToursLoading && city.name === chosenCity}
                                 timeout={1500}
@@ -93,7 +96,7 @@ const CitiesList = (props: IProps) => {
                                         {renderCityItem(city)}
                                     </CSSTransition> : renderCityItem(city, areToursLoading || isSpinnerAnimationActive)
                             }
-                        </>
+                        </React.Fragment>
                     )
                 })
             }

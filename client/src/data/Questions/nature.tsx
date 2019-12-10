@@ -12,6 +12,11 @@ export enum natureTypes {
 
 export const natureData = [
     {
+        type: natureTypes.water,
+        img: waterImg,
+        name: 'water',
+    },
+    {
         type: natureTypes.forest,
         img: forestImg,
         name: 'forest',
@@ -20,11 +25,6 @@ export const natureData = [
         type: natureTypes.mountains,
         img: mountainsImg,
         name: 'mountains',
-    },
-    {
-        type: natureTypes.water,
-        img: waterImg,
-        name: 'water',
     },
     {
         type: natureTypes.desert,

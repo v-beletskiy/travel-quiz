@@ -4,6 +4,13 @@ const Schema = mongoose.Schema;
 
 const tourSchema = new Schema({
     photos: Array,
+
+    dateIn: Date,
+    dateOut: Date,
+    days: Number,
+    hotelName: String,
+    hotelImg: String,
+    price: Number,
 })
 const Tour = mongoose.model('Tour', tourSchema);
 
