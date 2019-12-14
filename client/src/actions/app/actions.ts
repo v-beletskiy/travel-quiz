@@ -44,13 +44,18 @@ export const setToursLoadingStatus = (status: boolean) => {
 
 export const searchSuitableCities = (temperature: number, nature: natureType, restTypes: restType) => {
     return async (dispatch: any) => {
+        dispatch({
+            type: ActionType.RESET_CITY_DATA,
+        })
         const chosenNatureTypes = Object.entries(nature).filter(item => item[1] === true).map(item => item[0]);
         const chosenRestTypes = Object.entries(restTypes).filter(item => item[1] === true).map(item => item[0]);
         const cities = await AppService.getSuitableCitiesByParams(temperature, chosenNatureTypes, chosenRestTypes);
-        dispatch({
-            type: ActionType.UPDATE_CITIES_TO_CHOOSE_FROM,
-            payload: cities,
-        });
+        if (cities) {
+            dispatch({
+                type: ActionType.UPDATE_CITIES_TO_CHOOSE_FROM,
+                payload: cities,
+            });
+        }
     }
 }
 
@@ -60,6 +65,19 @@ export const setChosenCity = (cityName: string) => {
             type: ActionType.SET_CHOSEN_CITY,
             cityName,
         });
+    }
+}
+
+export const loadCityImages = (cityName: string) => {
+    return async (dispatch: any) => {
+        const cityImages: string[] = await AppService.getCityImages(cityName);
+        const absoluteURIsCityImages: string[] = cityImages.map(uri => `${process.env.LOCAL_URL}${uri}`);
+        if (cityImages) {
+            dispatch({
+                type: ActionType.GET_CITY_IMAGES,
+                payload: absoluteURIsCityImages,
+            });
+        }
     }
 }
 
@@ -90,10 +108,6 @@ export const loadTours = (cityName: string, budget: number, departure: string, p
         const toursPromise = AppService.getSuitableTours({ cityName: cityName, budget: budget, departure: departure, persons: personsNumber });
         const loaderPromise = new Promise((resolve) => {
             setTimeout(() => {
-                dispatch({
-                    type: ActionType.UPDATE_TOURS_LOADING_STATUS,
-                    status: false,
-                });
                 resolve();
             }, 3000);
         });
@@ -105,6 +119,10 @@ export const loadTours = (cityName: string, budget: number, departure: string, p
                         payload: responses[0],
                     })
                 }
+                dispatch({
+                    type: ActionType.UPDATE_TOURS_LOADING_STATUS,
+                    status: false,
+                });
             })
     }
 }

@@ -1,0 +1,56 @@
+@import "../../../styles/mixins.scss";
+@import "../../../styles/variables.scss";
+
+.gallery-swiper {
+  position: relative;
+}
+
+.gallery-swiper .gallery-swiper__control {
+  display: flex;
+  position: absolute;
+  top: calc(#{$galleryHeight} / 2);
+  transform: translateY(-50%);
+  width: 50px;
+  cursor: pointer;
+  > svg {
+    width: 100%;
+    fill: #f0f8fa;
+  }
+  @include res(mobile) {
+    width: 30px;
+  }
+  &--prev {
+    left: 5px;
+    transform: translateY(-50%);
+  }
+  &--next {
+    right: 5px;
+    transform: translateY(-50%) rotate(180deg);
+  }
+}
+
+.swiper-container {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent 0%, black 7%), linear-gradient(to left, transparent 0%, black 7%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%),
+    linear-gradient(to left, transparent 0%, black 7%);
+  mask-composite: destination-in;
+  -webkit-mask-composite: destination-in;
+}
+
+.swiper-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.swiper-slide {
+  width: auto;
+  height: $galleryHeight;
+  @include res(mobile) {
+    width: 100%;
+    object-fit: contain;
+  }
+}

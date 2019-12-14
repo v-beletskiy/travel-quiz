@@ -28,4 +28,9 @@ export default class Utils {
         const replacementString = string.replace(/(\r\n|\n|\r)/gm, "");
         return replacementString;
     }
+
+    static removeStringGaps(string: string) {
+        const removedGaps = string.replace(/\s/g, "");
+        return removedGaps;
+    }
 }

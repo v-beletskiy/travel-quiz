@@ -1,5 +1,5 @@
 import { ActionType } from '../actions/app/actionTypes';
-import IApp from './types/app';
+import IApp, { citiesToChooseFrom } from './types/app';
 
 const appInitialState: IApp = {
     isLoading: false,
@@ -28,6 +28,7 @@ const appInitialState: IApp = {
     citiesToChooseFrom: [],
     chosenCity: '',
     tours: [],
+    cityImages: [],
 };
 
 export default (state = appInitialState, action: any) => {
@@ -70,6 +71,12 @@ export default (state = appInitialState, action: any) => {
                 }
             }
         }
+        case ActionType.RESET_CITY_DATA: {
+            const chosenCity: string = '';
+            const citiesToChooseFrom: [citiesToChooseFrom] | [] = [];
+            const cityImages: string[] | [] = [];
+            return { ...state, chosenCity, citiesToChooseFrom, cityImages };
+        }
         case ActionType.UPDATE_CITIES_TO_CHOOSE_FROM: {
             const cities = action.payload;
             return { ...state, citiesToChooseFrom: cities };
@@ -81,6 +88,10 @@ export default (state = appInitialState, action: any) => {
         case ActionType.GET_TOURS: {
             const tours = action.payload;
             return { ...state, tours: tours };
+        }
+        case ActionType.GET_CITY_IMAGES: {
+            const cityImages = action.payload;
+            return { ...state, cityImages: cityImages };
         }
         default: {
             return state;

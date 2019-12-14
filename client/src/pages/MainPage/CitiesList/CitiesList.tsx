@@ -11,6 +11,7 @@ interface IProps {
     setChosenCity: Function,
     chosenCity: string,
     areToursLoading: boolean,
+    loadCityImages: Function,
     loadTours: Function,
     budget: number,
     departureTime: string,
@@ -32,20 +33,26 @@ const mapDispatchToProps = (dispatch: any) => {
         setChosenCity: (cityName: string) => {
             dispatch(appAction.setChosenCity(cityName));
         },
+        loadCityImages: (cityName: string) => {
+            dispatch(appAction.loadCityImages(cityName));
+        },
         loadTours: (cityName: string, budget: number, departureTime: string, persons: string) => {
             dispatch(appAction.loadTours(cityName, budget, departureTime, persons))
         },
     }
 }
 
-const handleCityClick = (e: React.MouseEvent, setChosenCity: Function, loadTours: Function, budget: number, departureTime: string, persons: string) => {
+const handleCityClick = (e: React.MouseEvent, setChosenCity: Function, loadTours: Function, loadCityImages: Function,
+    budget: number, departureTime: string, persons: string
+) => {
     const cityName = e.currentTarget.id.split('__')[1];
+    loadCityImages(cityName);
     loadTours(cityName, budget, departureTime, persons);
     setChosenCity(cityName);
 }
 
 const CitiesList = (props: IProps) => {
-    const { citiesToChooseFrom, setChosenCity, chosenCity, areToursLoading, loadTours, budget, departureTime, persons } = props;
+    const { citiesToChooseFrom, setChosenCity, chosenCity, areToursLoading, loadTours, loadCityImages, budget, departureTime, persons } = props;
     const [isSpinnerAnimationActive, setSpinnerAnimationStatus] = useState(false);
 
     const renderCityItem = (city: citiesToChooseFrom, isDisabled?: boolean) => {
@@ -53,7 +60,7 @@ const CitiesList = (props: IProps) => {
             <div
                 className={`cities-list-container__item ${isDisabled ? 'cities-list-container__item--disabled' : ''}`}
                 id={`citiesList__${city.name}`}
-                onClick={(e) => handleCityClick(e, setChosenCity, loadTours, budget, departureTime, persons)}
+                onClick={(e) => handleCityClick(e, setChosenCity, loadTours, loadCityImages, budget, departureTime, persons)}
             >
 
                 <img src={`${process.env.LOCAL_URL}/static/images/cities/${city.img}`} key={city.name} />

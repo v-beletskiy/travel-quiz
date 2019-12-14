@@ -80,20 +80,24 @@
   }
 }
 
-.cities-list-container-enter {
+.cities-list-container-enter,
+.chosen-city-container-enter {
   opacity: 0;
 }
 
-.cities-list-container-enter-active {
+.cities-list-container-enter-active,
+.chosen-city-container-enter-active {
   opacity: 1;
   transition: opacity cubic-bezier(0.99, 0.03, 0.97, 0.56) 1500ms;
 }
 
-.cities-list-container-exit {
+.cities-list-container-exit,
+.chosen-city-container-exit {
   opacity: 1;
 }
 
-.cities-list-container-exit-active {
+.cities-list-container-exit-active,
+.chosen-city-container-exit-active {
   opacity: 0;
   transition: opacity cubic-bezier(0.99, 0.03, 0.97, 0.56) 1500ms;
 }

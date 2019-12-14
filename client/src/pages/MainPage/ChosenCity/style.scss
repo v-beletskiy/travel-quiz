@@ -1,0 +1,12 @@
+@import "../../../styles/mixins.scss";
+
+.chosen-city-container {
+  padding-top: 80px;
+  &__title {
+    @include reset-margin-padding;
+    padding-bottom: 20px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+  }
+}

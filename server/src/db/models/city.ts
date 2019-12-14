@@ -17,6 +17,7 @@ const citySchema = new Schema({
         temperature: Number,
     },
     imgPreviewName: String,
+    photos: Array,
 })
 const City = mongoose.model('City', citySchema);
 

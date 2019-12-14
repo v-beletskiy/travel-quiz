@@ -3,8 +3,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const tourSchema = new Schema({
-    photos: Array,
-
     dateIn: Date,
     dateOut: Date,
     days: Number,

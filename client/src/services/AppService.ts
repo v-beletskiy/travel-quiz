@@ -14,6 +14,15 @@ export default class AppService {
         }
     }
 
+    static getCityImages = async (cityName: string) => {
+        try {
+            const cityImages = await axios.get(`${process.env.LOCAL_URL}/api/city-photos?cityName=${cityName}`);
+            return cityImages.data ? cityImages.data : null;
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     static getSuitableTours = async (tourData: tourData) => {
         try {
             const tours = await axios.post(`${process.env.LOCAL_URL}/api/find-tour-by-city`, tourData);

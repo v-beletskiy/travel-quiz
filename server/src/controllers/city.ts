@@ -58,7 +58,7 @@ async function getCityCoordsByName(request: Request, responce: Response) {
             .then(() => responce.status(200).json('Cities\' coordinates have been updated successfully.'))
             .catch(err => responce.status(500).json({ mes: 'Can\'t get cities\' coordinates by names.', err: err }));
     } catch (err) {
-        console.log(err)
+        console.log(err);
         responce.status(500).json({ mes: 'Can\'t get cities\' coordinates by names.', err: err });
     }
 }
@@ -72,8 +72,20 @@ async function fillDB(req: Request, res: Response) {
     }
 }
 
+async function getCityPhotos(req: Request, res: Response) {
+    try {
+        const { cityName } = req.query;
+        const city = await City.findOne({ city: cityName });
+        res.status(200).json(city.photos);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ mes: 'Can\'t get cities\' photos.', err: err });
+    }
+}
+
 module.exports = {
     getSuitableCitiesByParams,
     getCityCoordsByName,
     fillDB,
+    getCityPhotos,
 }

@@ -44,4 +44,5 @@ export default interface IApp {
     citiesToChooseFrom: [citiesToChooseFrom] | [],
     chosenCity: string,
     tours: [tours] | [],
+    cityImages: string[] | [],
 }
