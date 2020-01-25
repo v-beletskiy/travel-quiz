@@ -1,0 +1,31 @@
+@import "../../../../styles/mixins.scss";
+
+.tour-mobile-table {
+  padding-top: 20px;
+  &__element {
+    padding-bottom: 60px;
+    > img {
+      margin: 0 auto;
+    }
+    &__container {
+      display: flex;
+      flex-direction: column;
+      &__row {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 0;
+        align-items: center;
+      }
+      &__header {
+        @include reset-margin-padding;
+        padding-right: 30px!important;
+        font-weight: 700;
+      }
+      &__value {
+        @include reset-margin-padding;
+        text-align: right;
+        font-size: 22px;
+      }
+    }
+  }
+}

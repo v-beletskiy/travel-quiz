@@ -1,0 +1,24 @@
+@import "../../../styles/mixins.scss";
+
+.tours-container {
+  padding-top: 50px;
+  &__table-title {
+    @include reset-margin-padding;
+    font-size: 40px;
+    text-align: center;
+    font-weight: 700;
+  }
+  &__table-desktop {
+    @include res(mobile) {
+      display: none;
+    }
+    @include res(tablet) {
+        display: none;
+    }
+  }
+  &__table-mobile {
+    @include res(desktop) {
+        display: none;
+    }
+  }
+}
