@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import Header from '../../components/Header/Header';
@@ -9,7 +9,7 @@ import CitiesList from './CitiesList/CitiesList';
 import { citiesToChooseFrom } from '../../reducers/types/app';
 import { questionComponents } from '../../data/Questions/questions';
 import ChosenCity from './ChosenCity/ChosenCity';
-import { useEffect } from 'react';
+import Tours from './Tours/Tours';
 
 interface IProps {
     firstName: string,
@@ -113,6 +113,7 @@ const MainLandingPage = (props: IProps) => {
                 >
                     <div ref={chosenCityContainer}>
                         <ChosenCity />
+                        <Tours />
                     </div>
                 </CSSTransition>
             </main>

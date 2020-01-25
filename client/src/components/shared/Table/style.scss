@@ -1,0 +1,47 @@
+@import "../../../styles/mixins.scss";
+
+.table {
+  padding-top: 20px;
+  p {
+    @include reset-margin-padding;
+  }
+  &__header-container {
+    display: flex;
+    padding-bottom: 15px;
+    &__name {
+      display: flex;
+      width: var(--tableColumnWidth);
+      padding: 0 20px !important;
+      font-weight: 700;
+      cursor: pointer;
+      &__icon {
+          padding-left: 5px;
+          > svg {
+              height: 70%;
+          }
+      }
+    }
+  }
+  &__body {
+    border-radius: 20px;
+    box-shadow: 0 0 50px #ececec;
+    &__row-container {
+      display: flex;
+      align-items: center;
+      padding: 25px 15px;
+      font-size: 20px;
+      &__cell {
+        width: var(--tableColumnWidth);
+        padding: 0 20px;
+        word-wrap: break-word;
+        > img {
+          width: 100%;
+          border-radius: 10% 20%;
+        }
+      }
+    }
+    &__row-container:nth-child(even) {
+      background-color: #f8ffff;
+    }
+  }
+}
