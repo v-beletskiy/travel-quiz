@@ -93,6 +93,9 @@ export default (state = appInitialState, action: any) => {
             const cityImages = action.payload;
             return { ...state, cityImages: cityImages };
         }
+        case ActionType.RESET_TOURS: {
+            return { ...state, tours: [] };
+        }
         default: {
             return state;
         }

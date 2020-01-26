@@ -8,4 +8,5 @@ export const ActionType = {
     GET_CITY_IMAGES: 'GET_CITY_IMAGES',
     GET_TOURS: 'GET_TOURS',
     RESET_CITY_DATA: 'RESET_CITY_DATA',
+    RESET_TOURS: 'RESET_TOURS',
 };

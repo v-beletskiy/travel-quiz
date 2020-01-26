@@ -126,3 +126,14 @@ export const loadTours = (cityName: string, budget: number, departure: string, p
             })
     }
 }
+
+export const resetSearchData = () => {
+    return (dispatch: any) => {
+        dispatch({
+            type: ActionType.RESET_CITY_DATA,
+        })
+        dispatch({
+            type: ActionType.RESET_TOURS,
+        })
+    }
+}

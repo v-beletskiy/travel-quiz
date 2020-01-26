@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import './style.scss';
@@ -6,18 +6,30 @@ import { appAction } from '../../../actions';
 import ProgressBar from '../../../components/shared/ProgressBar/ProgressBar';
 import Spinner from '../../../components/shared/Spinner/Spinner';
 import { questionComponents } from '../../../data/Questions/questions';
+import { natureType, restType } from '../../../reducers/types/app';
 
 interface IProps {
     isLoading: boolean,
     question: number,
     setQuestionNumber: Function,
     updateAnswers: Function,
+    temperature: number,
+    nature: natureType,
+    restTypes: restType,
+    persons: string,
+    budget: number,
+    resetSearchData: Function,
 }
 
 const mapStateToProps = (state: any) => {
     return {
         isLoading: state.app.isLoading,
         question: state.app.question,
+        temperature: state.app.answers.temperature,
+        nature: state.app.answers.nature,
+        restTypes: state.app.answers.restTypes,
+        persons: state.app.answers.persons,
+        budget: state.app.answers.budget,
     }
 }
 
@@ -29,6 +41,9 @@ const mapDispatchToProps = (dispatch: any) => {
         updateAnswers: (questionType: string, answerData: any) => {
             dispatch(appAction.updateAnswers(questionType, answerData));
         },
+        resetSearchData: () => {
+            dispatch(appAction.resetSearchData());
+        }
     }
 }
 
@@ -55,7 +70,7 @@ const goNextButtonHandler = (setQuestionNumber: Function, updateAnswers: Functio
 }
 
 const Stepper = (props: IProps) => {
-    const { isLoading, question, setQuestionNumber, updateAnswers } = props;
+    const { isLoading, question, setQuestionNumber, updateAnswers, temperature, nature, restTypes, persons, budget, resetSearchData } = props;
     const [isSpinnerAnimationActive, setSpinnerAnimationStatus] = useState(false);
     const [isQuestionAnimationActive, setQuestionAnimationStatus] = useState(true);
     const [lastQuestionDimensions, setLastQuestionDimensions] = useState({
@@ -76,6 +91,10 @@ const Stepper = (props: IProps) => {
             window.scrollTo(0, 0);
         }
     }, [question]);
+
+    useEffect(() => {
+        resetSearchData();
+    }, [temperature, nature, persons, restTypes, budget]);
 
     return (
         <>

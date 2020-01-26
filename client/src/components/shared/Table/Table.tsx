@@ -46,7 +46,7 @@ const Table = (props: IProps) => {
         <div className={`table ${className}`}>
             <div className="table__header-container">
                 {headers.map(header =>
-                    <div className="table__header-container__name" {...header.getSortByToggleProps()} style={getTableColumnWidth(headers.length)}>
+                    <div key={header.id} className="table__header-container__name" {...header.getSortByToggleProps()} style={getTableColumnWidth(headers.length)}>
                         <p>{header.render("Header")}</p>
                         {header.id !== 'hotelImg' ? <p className="table__header-container__name__icon"><SortIcon /></p> : null}
                     </div>
@@ -59,7 +59,7 @@ const Table = (props: IProps) => {
                         <div className="table__body__row-container" style={getTableColumnWidth(headers.length)}>
                             {row.cells.map(cell => {
                                 return (
-                                    <div className="table__body__row-container__cell">
+                                    <div key={cell.value} className="table__body__row-container__cell">
                                         {cell.render("Cell")}
                                     </div>
                                 )
