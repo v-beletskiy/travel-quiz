@@ -63,7 +63,7 @@ const CitiesList = (props: IProps) => {
                 onClick={(e) => handleCityClick(e, setChosenCity, loadTours, loadCityImages, budget, departureTime, persons)}
             >
 
-                <img src={`${process.env.LOCAL_URL}/static/images/cities/${city.img}`} key={city.name} />
+                <img src={`${process.env.SERVER_ORIGIN}/static/images/cities/${city.img}`} key={city.name} />
                 <div className="cities-list-container__item__shade">
                     <p>{city.name}</p>
                     <p className="cities-list-container__item__shade__temperature">{city.temperature}<sup>o</sup>C</p>

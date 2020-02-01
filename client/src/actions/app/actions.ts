@@ -71,7 +71,7 @@ export const setChosenCity = (cityName: string) => {
 export const loadCityImages = (cityName: string) => {
     return async (dispatch: any) => {
         const cityImages: string[] = await AppService.getCityImages(cityName);
-        const absoluteURIsCityImages: string[] = cityImages.map(uri => `${process.env.LOCAL_URL}${uri}`);
+        const absoluteURIsCityImages: string[] = cityImages.map(uri => `${process.env.SERVER_ORIGIN}${uri}`);
         if (cityImages) {
             dispatch({
                 type: ActionType.GET_CITY_IMAGES,

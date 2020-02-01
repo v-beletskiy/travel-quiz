@@ -2,14 +2,15 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
+console.log('PATH', path.resolve(__dirname, './.env'))
 
 module.exports = {
-    entry: './index.tsx',
+    entry: './client/index.tsx',
     resolve: {
         extensions: ['.ts', '.tsx', '.js']
     },
     output: {
-        path: path.join(__dirname, '/dist'),
+        path: path.join(__dirname, '/build'),
         filename: 'bundle.min.js',
     },
     module: {
@@ -33,7 +34,7 @@ module.exports = {
                 use: {
                     loader: "file-loader",
                     options: {
-                        name: `./src/assets/fonts/[name].[ext]`,
+                        name: `./client/src/assets/fonts/[name].[ext]`,
                     }
                 }
             },
@@ -57,17 +58,17 @@ module.exports = {
                     {
                         loader: 'file-loader',
                     },
-                ],
+                ]
             },
         ]
     },
     plugins: [
         new Dotenv({
-            path: path.resolve(__dirname, '../server/.env'),
+            path: path.resolve(__dirname, './.env'),
             safe: true,
         }),
         new HtmlWebpackPlugin({
-            template: './src/index.html',
+            template: './client/src/index.html',
         }),
         new MiniCssExtractPlugin({
             filename: '[name].css',

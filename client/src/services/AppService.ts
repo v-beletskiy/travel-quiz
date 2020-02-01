@@ -5,7 +5,7 @@ import { tourData } from './types/AppService';
 export default class AppService {
     static getSuitableCitiesByParams = async (temperature: number, nature: any, restTypes: any) => {
         try {
-            const cities = await axios.post(`${process.env.LOCAL_URL}/api/find-appropriate-cities-for-rest`,
+            const cities = await axios.post(`${process.env.SERVER_ORIGIN}/api/find-appropriate-cities-for-rest`,
                 { temperature: temperature, nature: nature, restTypes: restTypes }
             );
             return cities.data ? cities.data : null;
@@ -16,7 +16,7 @@ export default class AppService {
 
     static getCityImages = async (cityName: string) => {
         try {
-            const cityImages = await axios.get(`${process.env.LOCAL_URL}/api/city-photos?cityName=${cityName}`);
+            const cityImages = await axios.get(`${process.env.SERVER_ORIGIN}/api/city-photos?cityName=${cityName}`);
             return cityImages.data ? cityImages.data : null;
         } catch (err) {
             console.error(err);
@@ -25,7 +25,7 @@ export default class AppService {
 
     static getSuitableTours = async (tourData: tourData) => {
         try {
-            const tours = await axios.post(`${process.env.LOCAL_URL}/api/find-tour-by-city`, tourData);
+            const tours = await axios.post(`${process.env.SERVER_ORIGIN}/api/find-tour-by-city`, tourData);
             return tours.data ? tours.data : null;
         } catch (err) {
             console.error(err);

@@ -23,7 +23,7 @@ export default class UserService {
                 email: email,
                 password: password,
             }
-            const user = await axios.post(`${process.env.LOCAL_URL}/api/signup`, { type: authStrategyTypes.local, user: userData });
+            const user = await axios.post(`${process.env.SERVER_ORIGIN}/api/signup`, { type: authStrategyTypes.local, user: userData });
             return user.data ? user.data : null;
         } catch (err) {
             console.error(err);
@@ -36,7 +36,7 @@ export default class UserService {
                 email: email,
                 password: password,
             }
-            const user = await axios.post(`${process.env.LOCAL_URL}/api/signin`, { type: authStrategyTypes.local, user: userData });
+            const user = await axios.post(`${process.env.SERVER_ORIGIN}/api/signin`, { type: authStrategyTypes.local, user: userData });
             return user.data ? user.data : null;
         } catch (err) {
             console.error(err);
@@ -45,7 +45,7 @@ export default class UserService {
 
     static signUpInViaGoogle = async (data: any, actionType: String) => {
         try {
-            const googleUser = await axios.post(`${process.env.LOCAL_URL}/api/${actionType}`, { type: authStrategyTypes.google, token: data.getAuthResponse().id_token });
+            const googleUser = await axios.post(`${process.env.SERVER_ORIGIN}/api/${actionType}`, { type: authStrategyTypes.google, token: data.getAuthResponse().id_token });
             return googleUser.data ? googleUser.data : null;
         } catch (err) {
             console.error(err);
@@ -55,7 +55,7 @@ export default class UserService {
 
     static signUpInViaFacebook = async (data: any, actionType: String) => {
         try {
-            const facebookUser = await axios.post(`${process.env.LOCAL_URL}/api/${actionType}`, { type: authStrategyTypes.facebook, token: data.accessToken });
+            const facebookUser = await axios.post(`${process.env.SERVER_ORIGIN}/api/${actionType}`, { type: authStrategyTypes.facebook, token: data.accessToken });
             return facebookUser.data ? facebookUser.data : null;
         } catch (err) {
             console.error(err);

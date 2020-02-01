@@ -1,6 +1,6 @@
 node_modules
 package-lock.json
-server/build
-server/.env
+.env
 server/upload
-client/dist
+server/build
+build
