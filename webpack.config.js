@@ -2,7 +2,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
-console.log('PATH', path.resolve(__dirname, './.env'))
 
 module.exports = {
     entry: './client/index.tsx',
@@ -34,7 +33,7 @@ module.exports = {
                 use: {
                     loader: "file-loader",
                     options: {
-                        name: `./client/src/assets/fonts/[name].[ext]`,
+                        name: `./assets/fonts/[name].[ext]`,
                     }
                 }
             },
@@ -64,7 +63,7 @@ module.exports = {
     },
     plugins: [
         new Dotenv({
-            path: path.resolve(__dirname, './.env'),
+            path: path.join(__dirname, '.env'),
             safe: true,
         }),
         new HtmlWebpackPlugin({

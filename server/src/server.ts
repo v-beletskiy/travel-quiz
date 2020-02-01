@@ -37,7 +37,7 @@ updateCitiesPhotos.start();
 app.use(express.static(path.join(__dirname, '../../build')));
 
 app.get('/*', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, '../../build/', 'index.html'));
+  res.sendFile(path.join(__dirname, '../../build', 'index.html'));
 });
 
 app.listen(port, function () {
