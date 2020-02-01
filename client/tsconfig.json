@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "./dist/",
+        "outDir": "../build/",
         "sourceMap": true,
         "noImplicitAny": true,
         "module": "commonjs",
@@ -8,8 +8,8 @@
         "jsx": "react",
         "esModuleInterop": true,
         "typeRoots": [
-            "./client/src/types",
-            "node_modules/@types"
+            "./src/types",
+            "../node_modules/@types"
         ]
     }
 }

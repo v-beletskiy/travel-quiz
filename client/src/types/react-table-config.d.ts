@@ -111,9 +111,9 @@ import {
       extends UseGroupByCellProps<D>,
         UseRowStateCellProps<D> {}
   
-    export interface Row<D extends object = {}>
-      extends UseExpandedRowProps<D>,
-        UseGroupByRowProps<D>,
-        UseRowSelectRowProps<D>,
-        UseRowStateRowProps<D> {}
+    // export interface Row<D extends object = {}>
+    //   extends UseExpandedRowProps<D>,
+    //     UseGroupByRowProps<D>,
+    //     UseRowSelectRowProps<D>,
+    //     UseRowStateRowProps<D> {}
   }

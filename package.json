@@ -9,7 +9,7 @@
     "lint": "eslint \"server/src/**/*.ts\"",
     "build-client": "webpack --mode production",
     "build-server": "tsc -p ./server",
-    "build": "npm run build-client & npm run build-server",
+    "build": "npm run build-client && npm run build-server",
     "start": "node server/build/server.js"
   },
   "author": "",

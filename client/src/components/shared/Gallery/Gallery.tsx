@@ -3,7 +3,7 @@ import Swiper from 'react-id-swiper';
 import './style.scss';
 const GalleryControlIcon = require('../../../assets/icons/galleryControlIcon.svg').default;
 
-const params = {
+const params: any = {
   slidesPerView: 'auto',
   spaceBetween: 30,
   effect: 'slide',
