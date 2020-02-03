@@ -69,10 +69,10 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
             'process.env': {
-                SERVER_ORIGIN: 'https://travel-quiz.herokuapp.com',
-                GOOGLE_AUTH_CLIENT_ID: '672296829298-afht3nto06agle3jbheb29j2g9gl3kvd.apps.googleusercontent.com',
-                FACEBOOK_AUTH_APP_ID: '360415558039523',
-                FACEBOOK_API_VERSION: 'v4.0',
+                SERVER_ORIGIN: JSON.stringify(process.env.SERVER_ORIGIN),
+                GOOGLE_AUTH_CLIENT_ID: JSON.stringify(process.env.GOOGLE_AUTH_CLIENT_ID),
+                FACEBOOK_AUTH_APP_ID: JSON.stringify(process.env.FACEBOOK_AUTH_APP_ID),
+                FACEBOOK_API_VERSION: JSON.stringify(process.env.FACEBOOK_API_VERSION),
             }
         }),
         new HtmlWebpackPlugin({
