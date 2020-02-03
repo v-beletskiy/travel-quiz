@@ -3,7 +3,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 const router = express.Router();
-require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 const port = process.env.PORT;
 const initializeDB = require("./db/DBconnection");
 import { Request, Response } from 'express';

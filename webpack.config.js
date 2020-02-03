@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
 
 module.exports = {
     entry: './client/index.tsx',
@@ -65,6 +66,14 @@ module.exports = {
         new Dotenv({
             path: path.join(__dirname, '.env'),
             safe: true,
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                SERVER_ORIGIN: 'https://travel-quiz.herokuapp.com',
+                GOOGLE_AUTH_CLIENT_ID: '672296829298-afht3nto06agle3jbheb29j2g9gl3kvd.apps.googleusercontent.com',
+                FACEBOOK_AUTH_APP_ID: '360415558039523',
+                FACEBOOK_API_VERSION: 'v4.0',
+            }
         }),
         new HtmlWebpackPlugin({
             template: './client/src/index.html',
