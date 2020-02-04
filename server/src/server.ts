@@ -29,7 +29,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', userApiRoutes, citiesApiRoutes, tourApiRoutes);
 app.use('/service-api', serviceApiRoutes);
 
-app.use('/static/images/cities', express.static(path.join(__dirname, '/static/images/cities')));
+if (process.env.NODE_ENV === 'production') {
+  app.use('/static/images/cities', express.static(path.join(__dirname, '../src/static/images/cities')));
+} else {
+  app.use('/static/images/cities', express.static(path.join(__dirname, '/static/images/cities')));
+}
 app.use('/upload', express.static(path.join(__dirname, '../upload')));
 
 updateCitiesWeather.start();
