@@ -39,19 +39,10 @@ class App extends React.Component<{}, IState> {
                 <ConnectedRouter history={history}>
                     <div className="app">
                         <Switch>
-                            {/* {UserService.isAuthenticated([accessToken]) ? */}
-                            {1 ?
+                            {UserService.isAuthenticated([accessToken]) ?
                                 <Route path="/" exact component={withAuth(MainPage, this.setAuthData, this.resetAuthData)} /> :
                                 <Route path="/" exact component={withAuth(MainLandingPage, this.setAuthData, this.resetAuthData)} />
                             }
-                            {/* {indexRoutes.map((route, idx) => {
-                            if (route.private) {
-                                return route.component ? this.renderPrivateRoute(route, idx) : null;
-                            } else {
-                                return route.component ? this.renderRoute(route, idx) : null;
-                            }
-                        })}
-                        <Route component={Notfound} /> */}
                         </Switch>
                     </div>
                 </ConnectedRouter>
