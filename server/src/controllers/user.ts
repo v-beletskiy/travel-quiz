@@ -1,6 +1,6 @@
 export { };
 import { Request, Response } from 'express';
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt');
 const User = require('../db/models/user');
 const authService = require('../services/authService');
 const { authStrategyTypes } = require('../data/authRoles');
