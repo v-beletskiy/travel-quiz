@@ -61,7 +61,7 @@ export default function withAuth(WrappedComponent: React.ComponentType, setAuthD
 
     class withAuth extends React.Component<IProps> {
         componentDidMount() {
-            // this.initAuth(authStrategyTypes.google);
+            this.initAuth(authStrategyTypes.google);
             this.initAuth(authStrategyTypes.facebook);
         }
 
