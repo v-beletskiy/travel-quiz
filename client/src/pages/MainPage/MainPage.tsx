@@ -19,6 +19,7 @@ interface IProps {
     question: number,
     chosenCity: string,
     areToursLoading: string,
+    signOut: Function,
 }
 
 const mapStateToProps = (state: any) => {
@@ -39,7 +40,7 @@ const navigationItems = [
 ];
 
 const MainLandingPage = (props: IProps) => {
-    const { firstName, lastName, citiesToChooseFrom, isLoading, question, chosenCity, areToursLoading } = props;
+    const { firstName, lastName, citiesToChooseFrom, isLoading, question, chosenCity, areToursLoading, signOut } = props;
     const [isMobileMenuOpen, setMobileMenuStatus] = useState(false);
     const [scrolledTo, setScrollTo] = useState({ citiesList: false, chosenCity: false });
 
@@ -90,6 +91,7 @@ const MainLandingPage = (props: IProps) => {
                 name={`${firstName} ${lastName}`}
                 isMobileMenuOpen={isMobileMenuOpen}
                 toggleMobileMenu={toggleMobileMenu}
+                signOut={signOut}
             />
             <main className="container">
                 <div className="questionnaire-container">

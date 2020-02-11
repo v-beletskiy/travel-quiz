@@ -9,6 +9,7 @@ interface IHeaderProps {
 	name: string,
 	isMobileMenuOpen: boolean,
 	toggleMobileMenu: Function,
+	signOut: Function,
 }
 
 interface INavProps {
@@ -31,7 +32,7 @@ const Nav = (props: INavProps) => {
 }
 
 const Header = (props: IHeaderProps) => {
-	const { navigationItems, name, isMobileMenuOpen, toggleMobileMenu } = props;
+	const { navigationItems, name, isMobileMenuOpen, toggleMobileMenu, signOut } = props;
 	return (
 		<header className={`header ${isMobileMenuOpen ? 'header--mobile-open' : ''}`}>
 			<div className="header-first-block">
@@ -42,8 +43,9 @@ const Header = (props: IHeaderProps) => {
 			</div>
 			<div className="header-second-block">
 				<span>{name}</span>
-				<div className="header-second-block__dropdown-arrow">
-					<DropdownArrow />
+				<div className="header-second-block__dropdown-arrow" onClick={() => signOut()}>
+					{/* <DropdownArrow /> */}
+					Log out
 				</div>
 			</div>
 			<div className="header-mobile-menu-icon" onClick={() => toggleMobileMenu()}>

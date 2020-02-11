@@ -23,6 +23,10 @@ export const signInLocal = (email: String, password: String, setAuthData: Functi
                 });
                 const authData = [user.token];
                 setAuthData(authData);
+                dispatch({
+                    type: ActionType.SET_SIGN_IN_STRATEGY,
+                    payload: authStrategyTypes.local,
+                })
             }
         } catch (err) {
             console.log(err);
@@ -53,9 +57,21 @@ export const signUpInSocial = (type: String, data: any, actionType: String, setA
                     type: ActionType.SIGNUPSOCIAL,
                     user,
                 });
+                dispatch({
+                    type: ActionType.SET_SIGN_IN_STRATEGY,
+                    payload: type,
+                })
             }
         } catch (err) {
             console.log(err);
         }
     };
+}
+
+export const logOut = () => {
+    return (dispatch: any) => {
+        dispatch({
+            type: ActionType.CLEAR_USER_INFO,
+        })
+    }
 }

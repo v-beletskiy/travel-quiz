@@ -14,6 +14,9 @@ const mapDispatchToProps = (dispatch: any) => {
         signUpInSocial: (type: String, data: any, actionType: String, setAuthData: Function) => {
             dispatch(userAction.signUpInSocial(type, data, actionType, setAuthData));
         },
+        logOut: () => {
+            dispatch(userAction.logOut());
+        },
     }
 }
 
@@ -50,13 +53,21 @@ const facebookAuth = (actionType: String, signUpInSocial: Function, setAuthData:
         }
     }, { scope: 'email', return_scopes: true, })
 }
+interface WrapperComponentProps {
+    signUpLocal: Function,
+    signInLocal: Function,
+    signUpSocial: Function,
+    signInSocial: Function,
+    signOut: Function,
+    setAuthData: Function,
+}
 
-
-export default function withAuth(WrappedComponent: React.ComponentType, setAuthData: Function, resetAuthData: Function) {
+export default function withAuth(WrappedComponent: React.ComponentType<WrapperComponentProps>, setAuthData: Function, resetAuthData: Function) {
     interface IProps {
         signUpLocal: Function,
         signInLocal: Function,
         signUpInSocial: Function,
+        logOut: Function,
     }
 
     class withAuth extends React.Component<IProps> {
@@ -121,11 +132,12 @@ export default function withAuth(WrappedComponent: React.ComponentType, setAuthD
                     break;
                 }
             }
-
         }
 
         signOut = (type: String) => {
+            const { logOut } = this.props;
             resetAuthData();
+            logOut();
             switch (type) {
                 case authStrategyTypes.google: {
                     const GoogleAuth = window.gapi.auth2.getAuthInstance();
@@ -141,7 +153,7 @@ export default function withAuth(WrappedComponent: React.ComponentType, setAuthD
 
         render() {
             const { signUpLocal, signInLocal } = this.props;
-            const authMethods = { signUpLocal: signUpLocal, signInLocal: signInLocal, signUpSocial: this.signUpSocial, signInSocial: this.signInSocial, signOut: this.signOut, setAuthData: setAuthData };
+            const authMethods = { signUpLocal, signInLocal, signUpSocial: this.signUpSocial, signInSocial: this.signInSocial, signOut: this.signOut, setAuthData };
             return (
                 <WrappedComponent {...authMethods} {...this.props} />
             )

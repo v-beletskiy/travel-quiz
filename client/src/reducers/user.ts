@@ -5,6 +5,7 @@ const userInitialState: IUser = {
   email: '',
   firstName: '',
   lastName: '',
+  signInStrategy: '',
 };
 
 export default (state = userInitialState, action: any) => {
@@ -13,6 +14,13 @@ export default (state = userInitialState, action: any) => {
     case ActionType.SIGNUPSOCIAL: {
       const { email, firstName, lastName } = action.user.userData;
       return { ...state, email, firstName, lastName };
+    }
+    case ActionType.SET_SIGN_IN_STRATEGY: {
+      const { payload } = action;
+      return { ...state, signInStrategy: payload };
+    }
+    case ActionType.CLEAR_USER_INFO: {
+      return { ...userInitialState };
     }
     default: {
       return state;
