@@ -56,8 +56,7 @@ const facebookAuth = (actionType: String, signUpInSocial: Function, setAuthData:
 interface WrapperComponentProps {
     signUpLocal: Function,
     signInLocal: Function,
-    signUpSocial: Function,
-    signInSocial: Function,
+    signUpAndInSocial: Function,
     signOut: Function,
     setAuthData: Function,
 }
@@ -106,21 +105,7 @@ export default function withAuth(WrappedComponent: React.ComponentType<WrapperCo
             }
         }
 
-        signUpSocial = (type: String) => {
-            const { signUpInSocial } = this.props;
-            switch (type) {
-                case authStrategyTypes.google: {
-                    googleAuth('signup', signUpInSocial, setAuthData);
-                    break;
-                }
-                case authStrategyTypes.facebook: {
-                    facebookAuth('signup', signUpInSocial, setAuthData);
-                    break;
-                }
-            }
-        }
-
-        signInSocial = (type: String) => {
+        signUpInSocial = (type: String) => {
             const { signUpInSocial } = this.props;
             switch (type) {
                 case authStrategyTypes.google: {
@@ -153,7 +138,7 @@ export default function withAuth(WrappedComponent: React.ComponentType<WrapperCo
 
         render() {
             const { signUpLocal, signInLocal } = this.props;
-            const authMethods = { signUpLocal, signInLocal, signUpSocial: this.signUpSocial, signInSocial: this.signInSocial, signOut: this.signOut, setAuthData };
+            const authMethods = { signUpLocal, signInLocal, signUpAndInSocial: this.signUpInSocial, signOut: this.signOut, setAuthData };
             return (
                 <WrappedComponent {...authMethods} {...this.props} />
             )

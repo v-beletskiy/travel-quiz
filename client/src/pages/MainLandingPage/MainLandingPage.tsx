@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 interface IProps {
     signUpLocal: Function,
     signInLocal: Function,
-    signUpSocial: Function,
-    signInSocial: Function,
+    signUpAndInSocial: Function,
     signOut: Function,
     setAuthData: Function,
 }
@@ -51,7 +50,7 @@ class MainPage extends React.Component<IProps, IState> {
     }
 
     render() {
-        const { signUpLocal, signInLocal, signUpSocial, signInSocial, signOut, setAuthData } = this.props;
+        const { signUpLocal, signInLocal, signUpAndInSocial, setAuthData } = this.props;
         const { emailSignUp, emailSignIn, passwordSignUp, passwordSignIn } = this.state;
         return (
             <>
@@ -66,17 +65,10 @@ class MainPage extends React.Component<IProps, IState> {
                 <input type="email" name="localEmailSignIn" placeholder="enter your email" onChange={this.handleChange} />
                 <input type="password" name="localPasswordSignIn" placeholder="enter your password" onChange={this.handleChange} />
                 <button onClick={() => { signInLocal(emailSignIn, passwordSignIn, setAuthData) }}>Submit</button>
-                {/* <button onClick={() => { signOut() }}>Sign out local</button> */}
                 <br />
-                <button onClick={() => signUpSocial('google')}>Enter via Google</button>
-                {/* <button onClick={() => signUpSocial('google')}>Google Sign up</button>
-                <button onClick={() => signInSocial('google')}>Google Sign in</button>
-                <button onClick={() => signOut('google')}>Google Sign out</button> */}
+                <button onClick={() => signUpAndInSocial('google')}>Enter via Google</button>
                 <br />
-                <button onClick={() => signUpSocial('facebook')}>Enter via Facebook</button>
-                {/* <button onClick={() => signUpSocial('facebook')}>Facebook Sign up</button>
-                <button onClick={() => signInSocial('facebook')}>Facebook Sign in</button>
-                <button onClick={() => signOut('facebook')}>Facebook Sign out</button> */}
+                <button onClick={() => signUpAndInSocial('facebook')}>Enter via Facebook</button>
             </>
         )
     }
