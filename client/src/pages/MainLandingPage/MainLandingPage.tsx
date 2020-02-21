@@ -13,13 +13,13 @@ interface IProps {
 }
 
 interface IState {
-    emailSignUp: String,
-    emailSignIn: String,
-    passwordSignUp: String,
-    passwordSignIn: String,
-    firstName: String,
-    lastName: String,
-    enterType: String,
+    emailSignUp: string,
+    emailSignIn: string,
+    passwordSignUp: string,
+    passwordSignIn: string,
+    firstName: string,
+    lastName: string,
+    enterType: string,
 }
 
 class MainPage extends React.Component<IProps, IState> {
@@ -94,18 +94,18 @@ class MainPage extends React.Component<IProps, IState> {
                 {enterType === 'signup' ?
                     <div className="landing-page__sign-container">
                         <p className="landing-page__sign-container__header">Sign up via email and login</p>
-                        <input type="email" name="localEmailSignUp" placeholder="enter your email" className="landing-page__sign-container__input" onChange={this.handleChange} />
-                        <input type="password" name="localPasswordSignUp" placeholder="enter your password" className="landing-page__sign-container__input" onChange={this.handleChange} />
-                        <input type="text" name="firstName" placeholder="enter your name" className="landing-page__sign-container__input" onChange={this.handleChange} />
-                        <input type="text" name="lastName" placeholder="enter your surname" className="landing-page__sign-container__input" onChange={this.handleChange} />
+                        <input type="email" value={emailSignUp} name="localEmailSignUp" placeholder="enter your email" className="landing-page__sign-container__input" onChange={this.handleChange} />
+                        <input type="password" value={passwordSignUp} name="localPasswordSignUp" placeholder="enter your password" className="landing-page__sign-container__input" onChange={this.handleChange} />
+                        <input type="text" value={firstName} name="firstName" placeholder="enter your name" className="landing-page__sign-container__input" onChange={this.handleChange} />
+                        <input type="text" value={lastName} name="lastName" placeholder="enter your surname" className="landing-page__sign-container__input" onChange={this.handleChange} />
                         <Button className="landing-page__sign-container__button" onClick={() => { signUpLocal(emailSignUp, passwordSignUp, firstName, lastName) }}>
                             Submit
                         </Button>
                     </div> :
                     <div className="landing-page__sign-container">
                         <p className="landing-page__sign-container__header">Sign in via email and login</p>
-                        <input type="email" name="localEmailSignIn" placeholder="enter your email" className="landing-page__sign-container__input" onChange={this.handleChange} />
-                        <input type="password" name="localPasswordSignIn" placeholder="enter your password" className="landing-page__sign-container__input" onChange={this.handleChange} />
+                        <input type="email" value={emailSignIn} name="localEmailSignIn" placeholder="enter your email" className="landing-page__sign-container__input" onChange={this.handleChange} />
+                        <input type="password" value={passwordSignIn} name="localPasswordSignIn" placeholder="enter your password" className="landing-page__sign-container__input" onChange={this.handleChange} />
                         <Button className="landing-page__sign-container__button" onClick={() => { signInLocal(emailSignIn, passwordSignIn, setAuthData) }}>
                             Submit
                         </Button>
