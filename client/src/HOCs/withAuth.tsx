@@ -5,8 +5,8 @@ import { authStrategyTypes } from '../../../server/src/data/authRoles';
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        signUpLocal: (email: String, password: String) => {
-            dispatch(userAction.signUpLocal(email, password));
+        signUpLocal: (email: String, password: String, firstName: String, lastName: String) => {
+            dispatch(userAction.signUpLocal(email, password, firstName, lastName));
         },
         signInLocal: (email: String, password: String, setAuthData: Function) => {
             dispatch(userAction.signInLocal(email, password, setAuthData))

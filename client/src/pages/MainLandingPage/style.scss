@@ -1,0 +1,103 @@
+@import "./../../styles/mixins.scss";
+
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: 30px auto;
+  padding: 35px 40px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  box-shadow: 0 0 50px #ececec;
+  @include res(mobile) {
+    width: 85%;
+    padding: 35px 25px;
+  }
+  &__header {
+    font-size: 38px;
+    @include reset-margin-padding;
+  }
+  &__sign-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    &__header {
+      @include reset-margin-padding;
+      padding-bottom: 10px;
+    }
+    &__input {
+      margin-bottom: 10px;
+      padding: 10px 25px;
+      border: 0;
+      color: #505050;
+      font-size: 26px;
+      background-color: #f7f7f7;
+      border-radius: 10px;
+      caret-color: #ffb94bd4;
+      &:focus {
+        outline: 0;
+      }
+      &::placeholder {
+        color: #e3e3e3;
+      }
+    }
+    &__button {
+      border: 0;
+      outline: none;
+      padding: 5px 35px;
+      border-radius: 100px 20px;
+      cursor: pointer;
+      color: #fff;
+      font-weight: 700;
+    }
+    > .landing-page__sign-container__button {
+      background: linear-gradient(90deg, #fff3e0, #ffb94bd4);
+    }
+  }
+  &__social-button-container {
+    display: flex;
+    align-items: center;
+    padding: 10px 25px;
+    margin-bottom: 10px;
+    background-color: #304b7c;
+    border-radius: 100px 20px;
+    cursor: pointer;
+    transition: all .4s ease-out;
+    &:hover {
+      background-color: #35435d;
+    }
+    &__icon {
+      display: flex;
+      align-items: center;
+      flex: 2;
+    }
+    &__text {
+      display: flex;
+      flex: 8;
+      justify-content: center;
+      color: #fff;
+      font-size: 26px;
+      > p {
+        @include reset-margin-padding;
+      }
+    }
+  }
+  &__google-button-container {
+    background-color: #3174f1;
+    &:hover {
+      background-color: #3964b5;
+    }
+  }
+  &__enter-type-container {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    > .landing-page__enter-type-container__button {
+      padding: 5px 25px;
+      background: linear-gradient(45deg, #ccd2d2, #f1fcff);
+    }
+    > .landing-page__enter-type-container__button--active {
+      background: linear-gradient(90deg, #fff3e0, #ffb94bd4);
+    }
+  }
+}

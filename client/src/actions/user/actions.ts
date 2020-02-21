@@ -2,10 +2,10 @@ import { ActionType } from './actionTypes';
 import UserService from '../../services/UserService';
 import { authStrategyTypes } from '../../../../server/src/data/authRoles';
 
-export const signUpLocal = (email: String, password: String) => {
+export const signUpLocal = (email: String, password: String, firstName: String, lastName: String) => {
     return async () => {
         try {
-            UserService.signUpLocal(email, password);
+            UserService.signUpLocal(email, password, firstName, lastName);
         } catch (err) {
             console.log(err);
         }

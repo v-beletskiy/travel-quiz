@@ -17,11 +17,13 @@ export default class UserService {
         return JSON.parse(accessTokenPayload); 
     }
 
-    static signUpLocal = async (email: String, password: String) => {
+    static signUpLocal = async (email: String, password: String, firstName: String, lastName: String) => {
         try {
             const userData = {
-                email: email,
-                password: password,
+                email,
+                password,
+                firstName,
+                lastName,
             }
             const user = await axios.post(`${process.env.SERVER_ORIGIN}/api/signup`, { type: authStrategyTypes.local, user: userData });
             return user.data ? user.data : null;
@@ -33,8 +35,8 @@ export default class UserService {
     static signInLocal = async (email: String, password: String) => {
         try {
             const userData = {
-                email: email,
-                password: password,
+                email,
+                password,
             }
             const user = await axios.post(`${process.env.SERVER_ORIGIN}/api/signin`, { type: authStrategyTypes.local, user: userData });
             return user.data ? user.data : null;
