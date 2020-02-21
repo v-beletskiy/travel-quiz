@@ -8,6 +8,7 @@ import './styles/style.scss';
 import './styles/fonts.scss';
 import withAuth from './HOCs/withAuth';
 import UserService from './services/UserService';
+import { resetAppState } from './actions/app/actions';
 
 import MainLandingPage from './pages/MainLandingPage/MainLandingPage';
 import MainPage from './pages/MainPage/MainPage';
@@ -32,6 +33,7 @@ class App extends React.Component<{}, IState> {
     resetAuthData = () => {
         sessionStorage.removeItem('accessToken');
         this.setState({ accessTokenUpdated: true });
+        resetAppState();
     }
 
     render() {

@@ -3,9 +3,6 @@ import { Request, Response, NextFunction } from 'express';
 import axios from 'axios';
 const { OAuth2Client } = require('google-auth-library');
 
-const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
-    res.status(401).send('Access denied');
-}
 
 const keyToSignToken = process.env.TOKEN_KEY;
 
@@ -56,7 +53,7 @@ const verifyJWT = (req: Request, res: Response, next: NextFunction) => {
 }
 
 //GOOGLE AUTH
-const decodeGoogleAuthToken = async (token: String) => {
+const decodeGoogleAuthToken = async (token: string) => {
     return new Promise(async (resolve, reject) => {
         const client = new OAuth2Client(process.env.GOOGLE_AUTH_CLIENT_ID);
         try {
@@ -83,7 +80,7 @@ const decodeGoogleAuthToken = async (token: String) => {
 }
 
 //FACEBOOK AUTH
-const decodeFacebookAuthToken = async (token: String) => {
+const decodeFacebookAuthToken = async (token: string) => {
     const user = await axios.get(`https://graph.facebook.com/${process.env.FACEBOOK_API_VERSION}/me?fields=email,name&access_token=${token}`);
     return user.data;
 }

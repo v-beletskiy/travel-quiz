@@ -96,6 +96,9 @@ export default (state = appInitialState, action: any) => {
         case ActionType.RESET_TOURS: {
             return { ...state, tours: [] };
         }
+        case ActionType.CLEAR_APP_INFO: {
+            return { ...appInitialState };
+        }
         default: {
             return state;
         }

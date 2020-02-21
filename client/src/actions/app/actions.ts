@@ -2,6 +2,7 @@ import { ActionType } from './actionTypes';
 import { natureType, restType } from '../../reducers/types/app';
 import AppService from '../../services/AppService';
 import { personsTypes } from '../../data/Questions/persons';
+import { store } from '../../store/store';
 
 export const setQuestionNumber = (number: Number) => {
     return (dispatch: any) => {
@@ -136,4 +137,8 @@ export const resetSearchData = () => {
             type: ActionType.RESET_TOURS,
         })
     }
+}
+
+export const resetAppState = () => {
+    store.dispatch({ type: ActionType.CLEAR_APP_INFO });
 }

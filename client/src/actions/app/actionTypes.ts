@@ -9,4 +9,5 @@ export const ActionType = {
     GET_TOURS: 'GET_TOURS',
     RESET_CITY_DATA: 'RESET_CITY_DATA',
     RESET_TOURS: 'RESET_TOURS',
+    CLEAR_APP_INFO: 'CLEAR_APP_INFO',
 };
