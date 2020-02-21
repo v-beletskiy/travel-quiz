@@ -13,27 +13,29 @@ import MainLandingPage from './pages/MainLandingPage/MainLandingPage';
 import MainPage from './pages/MainPage/MainPage';
 
 interface IState {
-    accessToken: String,
+    accessTokenUpdated: boolean,
 }
 class App extends React.Component<{}, IState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            accessToken: '',
+            accessTokenUpdated: false,
         };
     }
 
-    setAuthData = (authData: String[]) => {
+    setAuthData = (authData: string[]) => {
         const [accessToken] = authData;
-        this.setState({ accessToken });
+        sessionStorage.setItem('accessToken', accessToken);
+        this.setState({ accessTokenUpdated: true });
     }
 
     resetAuthData = () => {
-        this.setState({ accessToken: '' });
+        sessionStorage.removeItem('accessToken');
+        this.setState({ accessTokenUpdated: true });
     }
 
     render() {
-        const { accessToken } = this.state;
+        const accessToken = sessionStorage.getItem('accessToken');
         return (
             <Provider store={store}>
                 <ConnectedRouter history={history}>
