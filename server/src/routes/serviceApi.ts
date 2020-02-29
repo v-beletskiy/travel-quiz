@@ -1,4 +1,5 @@
 export {};
+import CityData from '../db/scriptsToFillDB/cityData';
 const authService = require('../services/authService');
 const express = require('express');
 const cityController = require('../controllers/city');
@@ -11,5 +12,7 @@ serviceApiRouter.get('/fill-cities-db', authService.verifyJWT, cityController.fi
 serviceApiRouter.get('/update-city-coords-db', authService.verifyJWT, cityController.getCityCoordsByName);
 
 serviceApiRouter.get('/fill-currency-db', authService.verifyJWT, currencyController.fillCurrencyDB);
+
+serviceApiRouter.get('/city', authService.verifyJWT, CityData);
 
 module.exports = serviceApiRouter;
