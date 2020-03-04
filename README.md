@@ -4,7 +4,6 @@ Find location to visit that perfectly fits you right now!
 Answer several questions and get cities list with gallery and list of tours available to travel to.
 Just [follow here](https://travel-quiz.herokuapp.com) and give it a try!
 
-
 ## Technologies used
 - React
 - Redux
